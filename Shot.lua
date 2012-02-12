@@ -7,6 +7,7 @@ angle = 0
 spin = 0
 speed = 300 -- movement speed in px/s
 score = 0 -- bonus points for this shot
+image = love.graphics.newImage("gifty.png")
 
 function __init(self, ...)
     super.__init(self, ...)
@@ -19,16 +20,8 @@ function draw(self)
     lg.translate(self.x, self.y)
     lg.rotate(self.spin)
 
-    -- draw a Steam gift
-    lg.setColor(82, 82, 82)
-    lg.rectangle("fill", -5, -5, 10, 10)
-    lg.setColor(212, 208, 163)
-    lg.rectangle("fill", -1, -5, 2, 10)
-    lg.setLineWidth(2)
-    lg.line(0, -5, -3, -2)
-    lg.line(0, -5, 3, -2)
-    lg.line(0, -5, -2, -6)
-    lg.line(0, -5, 2, -6)
+    lg.setColor(255, 255, 255)
+    lg.draw(self.image, -8, -8, 0, 16/100, 16/100)
 
     -- pop
     lg.rotate(-self.spin)
