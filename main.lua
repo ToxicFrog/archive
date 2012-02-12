@@ -13,7 +13,7 @@ function love.load()
 
     objects[tank] = true
 
-    love.graphics.setBackgroundColor(160,136,99)
+    love.graphics.setBackgroundColor(220,220,240)
 
     math.randomseed(os.time())
 end
@@ -24,7 +24,7 @@ function love.draw()
     end
 
     -- draw score
-    love.graphics.setColor(255, 255, 255)
+    love.graphics.setColor(0, 0, 0)
     love.graphics.print(tostring(love.score), 10, 10)
 end
 
