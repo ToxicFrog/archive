@@ -81,7 +81,7 @@ function update(self, dt)
     -- spawn enemies
     -- they can show up anywhere around the edges, at a rate dependent
     -- on your score
-    local spawnrate = 0.5 + (love.score/10000)
+    local spawnrate = 0.5 + (love.score/5000)
     self.spawn = self.spawn - spawnrate * dt
     while self.spawn <= 0 do
         -- spawn an enemy
