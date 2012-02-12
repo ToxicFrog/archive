@@ -2,7 +2,7 @@ local super = class(..., "Entity")
 local lg = love.graphics
 
 x,y = 0,0
-speed = 30
+speed = 55
 score = 100
 image = love.graphics.newImage("steam.png")
 
