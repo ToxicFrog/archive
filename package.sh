@@ -9,7 +9,7 @@ git archive HEAD --format=zip > bin/"$TITLE.love"
 # create windows binaries
 pushd bin
 	cp -r ../love/win32 "$TITLE"
-	cat win32/love.exe "$TITLE.love" > "$TITLE"/"$TITLE.exe"
+	cat "$TITLE/love.exe" "$TITLE.love" > "$TITLE"/"$TITLE.exe"
 	rm "$TITLE/love.exe"
 	zip -r "$TITLE-win32.zip" "$TITLE"
 popd
