@@ -1,0 +1,81 @@
+
+class ViewUpdater
+    inherit Object
+    var FrameTime :int := 0
+    var HPBarRes : real := HPBAR_LENGTH / SWConf.PlayerHP
+    body procedure Create(ix,iy,idx,idy:real)
+        HPBarRes := HPBAR_LENGTH / SWConf.PlayerHP
+        return
+    end Create
+    body procedure Update()
+
+        Text.LocateXY(0,SCREEN_Y div 2 + 4)
+        put Players(1).HP..
+        Pic.Draw(Primaries(Players(1).weapon).Image,1,SCREEN_Y-17,2)
+        Pic.Draw(Secondaries(Players(1).altweapon).Image,1,SCREEN_Y-33,2)
+        Text.LocateXY(0,SCREEN_Y-48)
+        put Players(1).ammo(Players(1).altweapon)..
+        Text.LocateXY(0,SCREEN_Y-64)
+        put Players(1).kills..
+        Text.LocateXY(0,SCREEN_Y-80)
+        put Players(1).deaths..
+        Draw.FillBox(1,SCREEN_Y div 2 + 16, STATUS_BAR_SIZE-2,SCREEN_Y div 2 + 16 + max(0,round(HPBarRes*Players(1).HP)),SWConf.Player1Color)
+        
+        Text.LocateXY(0,SCREEN_Y div 2 - 7)
+        put Players(2).HP..
+        Pic.Draw(Primaries(Players(2).weapon).Image,1,1,2)
+        Pic.Draw(Secondaries(Players(2).altweapon).Image,1,17,2)
+        Text.LocateXY(0,47)
+        put Players(2).ammo(Players(2).altweapon)..
+        Text.LocateXY(0,63)
+        put Players(2).kills..
+        Text.LocateXY(0,79)
+        put Players(2).deaths..
+        Draw.FillBox(1,SCREEN_Y div 2 - 16, STATUS_BAR_SIZE-2,SCREEN_Y div 2 - 16 - max(0,round(HPBarRes*Players(2).HP)),SWConf.Player2Color) 
+        Draw.Line(STATUS_BAR_SIZE,0, STATUS_BAR_SIZE, SCREEN_Y,0)
+        Draw.Line(0,SCREEN_Y div 2, STATUS_BAR_SIZE, SCREEN_Y div 2,0)
+        if Time.Elapsed()-FrameTime < 1000 div FPS then
+            Text.LocateXY(STATUS_BAR_SIZE+5,SCREEN_Y-18)
+            Time.Delay(1000 div FPS + FrameTime - Time.Elapsed())
+        end if
+        View.Update()
+        cls
+        Pic.Draw(SUN,40,0,0)
+        Text.LocateXY(STATUS_BAR_SIZE+5,SCREEN_Y)
+        put 1000 div (Time.Elapsed()-FrameTime), "fps"..
+        FrameTime := Time.Elapsed()
+        current := current->next
+        ExitConditions := (input(chr(27)) or Players(1).kills >= SWConf.KillsToWin or Players(2).kills >= SWConf.KillsToWin or Players(1).deaths >= SWConf.DeathsToLose or Players(2).deaths >= SWConf.DeathsToLose)
+    end Update
+end ViewUpdater
+
+class Explosion
+    inherit Object
+    var clrmin:int:=39
+    var clrmax:int:=43
+    body procedure Create(ix,iy,idx,idy:real)
+        x := ix
+        y := iy
+        dx := floor(idx)
+        dy := ceil(idy)
+        clrmin := round((idx mod 1)*100)
+        clrmax := round((idy mod 1)*100)
+    end Create
+    body procedure Update()
+        dx += 1
+        if round(dy-abs(dy-(dx)))=0 then
+            Draw.FillOval(round(x),round(y),1,1,7)
+            current := current->next
+            current->prev := current->prev->prev
+            rmObject(current->prev->next)
+            current->prev->next := current
+            return
+        else
+            Draw.FillOval(round(x),round(y),round(dy-abs(dy-(dx))),round(dy-abs(dy-(dx))),7)
+            Draw.FillOval(round(x),round(y),round(dy-abs(dy-(dx))),round(dy-abs(dy-(dx))),Rand.Int(clrmin,clrmax))
+            current := current->next
+            return
+        end if
+    end Update
+end Explosion
+

@@ -1,0 +1,22 @@
+SWConf.PlayerHP			int 1-9999
+SWConf.PlayerAccel		real 0.001-0.8	(px per frame squared)
+SWConf.Player1Color		int 0-255
+SWConf.Player2Color		int 0-255
+SWConf.DamagePerBullet		int 1-9999
+SWConf.BulletFuel		int 30-900	(bullet lifetime in frames)
+SWConf.DamagePerMiniBeam	int 1-9999
+SWConf.DamagePerLightBeam	int 1-9999
+SWConf.DamagePerHeavyBeam	int 1-9999
+SWConf.DamagePerMissileImpact	int 1-9999
+SWConf.DamagePerMissileBlast	int 1-9999
+SWConf.DamagePerMissileNeedler	int 1-9999
+SWConf.DamagePerMissileBeam	int 1-9999
+SWConf.ImpactMissileAccel	real 0.001-0.8
+SWConf.BlastMissileAccel	real 0.001-0.8
+SWConf.NeedlerMissileAccel	real 0.001-0.8
+SWConf.BeamMissileAccel		real 0.001-0.8
+SWConf.PointsToWin		int 1-1024
+SWConf.DeathsToLose		int 1-1024
+SWConf.MissilesPerPack		int 1-1024
+SWConf.ItemPackDelay		int 30-18000	(after a missile or weapon pack is grabbed, how long until a new one appears, in frames)
+SWConf.MissilePackRatio		int 0-255	(this should be adjusted with a slider. A value of 255 means that nothing but missile packs will appear, while 0 means nothing but weapon upgrades. 128 means an even balance of both.)

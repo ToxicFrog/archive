@@ -1,0 +1,9 @@
+class Object
+    export Create,Update,x,y,dx,dy
+    deferred procedure Create(ix,iy,idx,idy:real)
+    deferred procedure Update()
+    var x : real := 100
+    var y : real := 240
+    var dx : real := 0
+    var dy : real := 0
+end Object

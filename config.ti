@@ -1,0 +1,14 @@
+%setscreen("graphics:780;740,offscreenonly,nocursor,noecho,nobuttonbar")
+Window.SetActive(Window.Open("position:center;truemiddle,graphics:780;740,title:Spacewar+,offscreenonly,nocursor,noecho,nobuttonbar"))
+randomize()
+const *SCREEN_X          : int := 780
+const *SCREEN_Y          : int := 740
+const *STATUS_BAR_SIZE   : int := 40
+const *SUN_X             : int := (SCREEN_X+STATUS_BAR_SIZE) div 2
+const *SUN_Y             : int := SCREEN_Y div 2
+const *FPS               : int := 30
+const *HPBAR_LENGTH      : int := (SCREEN_Y-80)-(SCREEN_Y div 2 + 16)
+const *FLANGE_LENGTH     : int := round(sqrt(80))
+const *FLANGE_ANGLE      : int := round(arctand(1/2))
+const *SHIP_SIZE         : int := 24
+const *SUN               : int := Pic.FileNew("images/screen.bmp")

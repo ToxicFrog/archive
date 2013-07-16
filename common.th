@@ -1,0 +1,15 @@
+forward function pervasive ComponentX(magnitude:real,theta:int):real
+forward function pervasive ComponentY(magnitude:real,theta:int):real
+forward function pervasive TrueDist(x1,y1,x2,y2:real):real
+forward procedure pervasive rmObject(var victim : ^node)
+forward procedure pervasive AddObject(ObjType : string(8), x,y,dx,dy:real)
+forward procedure pervasive BlowItUp(x,y,rnn,rnm,rmn,rmm,clrmin,clrmax,nrof,radiusX,radiusY:int)
+forward function pervasive Theta(x1,y1,x2,y2:real):int
+forward procedure pervasive Beam(x1,y1,x2,y2:real,clrmin,clrmax,width:int)
+%forward function pervasive tand(theta : int) : real
+forward procedure pervasive DrawPlayer(x,y:real,theta, color, color2 : int)
+forward procedure pervasive Main()
+forward procedure pervasive StartNewGame()
+forward procedure pervasive ChangeConfig()
+forward procedure pervasive RemapKeys()
+forward procedure pervasive ShowHelp()

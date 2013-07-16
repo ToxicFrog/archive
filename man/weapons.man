@@ -1,0 +1,25 @@
+WEAPON SYSTEMS
+
+MASS DRIVER
+This is your ship's basic weapon. It uses magnetic fields to accelerate metal
+slugs to immense speeds. These slugs flash into plasma upon impact, dealing minor
+damage. The slugs are affected by gravity.
+
+DUAL MASS DRIVER
+This is an upgraded version of the Mass Driver. It mounts a gun on each wing of
+the ship, rather than the single center gun used by the normal Mass Driver. It is
+just as powerful, but the extra gun allows it to fire twice as fast without
+overheating.
+
+X-RAY LASER
+This weapon consists of two small projectors -- one on each wing -- which emit a
+focussed beam of X-rays, frying anything in their path. The projectors fire
+alternating, rapid pulses. Unlike the mass driver, the lasers are not noticeably
+affected by gravity except in extreme conditions.
+
+BRIGHT LANCE
+Designed to punch through planetary defences from a safe distance, the Bright
+Lance consists of a single, heavy gamma-ray laser mounted under the cockpit. It
+is much more powerful and focussed than the X-ray lasers, allowing it hit distant
+targets with a high degree of accuracy. Its one drawback is its lengthy cool-down
+time between shots.

@@ -1,0 +1,78 @@
+var NewGameWidgets : array 1 .. 12 of int
+procedure UpdatePlayer1ColorSlider(scolor:int)
+    SWConf.Player1Color := scolor
+    Draw.FillBox(GUI.GetX(NewGameWidgets(1)),GUI.GetY(NewGameWidgets(1)),GUI.GetX(NewGameWidgets(1))+GUI.GetWidth(NewGameWidgets(1)),GUI.GetY(NewGameWidgets(1))+GUI.GetHeight(NewGameWidgets(1)),scolor)
+    GUI.Refresh
+    View.Update
+    return
+end UpdatePlayer1ColorSlider
+procedure UpdatePlayer2ColorSlider(scolor:int)
+    SWConf.Player2Color := scolor
+    Draw.FillBox(GUI.GetX(NewGameWidgets(2)),GUI.GetY(NewGameWidgets(2)),GUI.GetX(NewGameWidgets(2))+GUI.GetWidth(NewGameWidgets(2)),GUI.GetY(NewGameWidgets(2))+GUI.GetHeight(NewGameWidgets(2)),scolor)
+    GUI.Refresh
+    View.Update
+    return
+end UpdatePlayer2ColorSlider
+procedure UpdateMassDriver(status:boolean)
+    SWConf.InitMassDriver := status
+    View.Update
+end UpdateMassDriver
+procedure UpdateWMassDriver(status:boolean)
+    SWConf.InitWMassDriver := status
+    View.Update
+end UpdateWMassDriver
+procedure UpdateXRL(status:boolean)
+    SWConf.InitXRL := status
+    View.Update
+end UpdateXRL
+procedure UpdateBrightLance(status:boolean)
+    SWConf.InitBrightLance := status
+    View.Update
+end UpdateBrightLance
+procedure UpdateInitImpactMissiles(nrof:int)
+    SWConf.InitImpactMissiles := nrof
+    Draw.FillBox(GUI.GetX(NewGameWidgets(7)),GUI.GetY(NewGameWidgets(7)),780,GUI.GetY(NewGameWidgets(7))+GUI.GetHeight(NewGameWidgets(7)),0)
+    Pic.Draw(NewGameBG,0,0,3)
+    Font.Draw(intstr(nrof),664,216,FontTitle,7)
+    GUI.Refresh
+    View.Update
+end UpdateInitImpactMissiles
+procedure UpdateInitBlastMissiles(nrof:int)
+    SWConf.InitBlastMissiles := nrof
+    Draw.FillBox(GUI.GetX(NewGameWidgets(8)),GUI.GetY(NewGameWidgets(8)),780,GUI.GetY(NewGameWidgets(8))+GUI.GetHeight(NewGameWidgets(8)),0)
+    Pic.Draw(NewGameBG,0,0,3)
+    Font.Draw(intstr(nrof),664,181,FontTitle,7)
+    GUI.Refresh
+    View.Update
+end UpdateInitBlastMissiles
+procedure UpdateInitNeedlers(nrof:int)
+    SWConf.InitNeedlers := nrof
+    Draw.FillBox(GUI.GetX(NewGameWidgets(9)),GUI.GetY(NewGameWidgets(9)),780,GUI.GetY(NewGameWidgets(9))+GUI.GetHeight(NewGameWidgets(9)),0)
+    Pic.Draw(NewGameBG,0,0,3)
+    Font.Draw(intstr(nrof),664,146,FontTitle,7)
+    GUI.Refresh
+    View.Update
+end UpdateInitNeedlers
+procedure UpdateInitBeamMissiles(nrof:int)
+    SWConf.InitBeamMissiles := nrof
+    Draw.FillBox(GUI.GetX(NewGameWidgets(10)),GUI.GetY(NewGameWidgets(10)),780,GUI.GetY(NewGameWidgets(10))+GUI.GetHeight(NewGameWidgets(10)),0)
+    Pic.Draw(NewGameBG,0,0,3)
+    Font.Draw(intstr(nrof),664,111,FontTitle,7)
+    GUI.Refresh
+    View.Update
+end UpdateInitBeamMissiles
+procedure CancelNewGameConfig
+    ExitCall := true
+end CancelNewGameConfig
+NewGameWidgets(1) := GUI.CreateHorizontalSlider (134, 500, 512,0, 255, 9, UpdatePlayer1ColorSlider)
+NewGameWidgets(2) := GUI.CreateHorizontalSlider (134, 465, 512,0, 255, 10, UpdatePlayer2ColorSlider)
+NewGameWidgets(3) := GUI.CreateCheckBox(134,400,"",UpdateMassDriver)
+NewGameWidgets(4) := GUI.CreateCheckBox(134,352,"",UpdateWMassDriver)
+NewGameWidgets(5) := GUI.CreateCheckBox(134,304,"",UpdateXRL)
+NewGameWidgets(6) := GUI.CreateCheckBox(134,256,"",UpdateBrightLance)
+NewGameWidgets(7) := GUI.CreateHorizontalSlider (134, 221, 512,0, 512, 5, UpdateInitImpactMissiles)
+NewGameWidgets(8) := GUI.CreateHorizontalSlider (134, 186, 512,0, 512, 0, UpdateInitBlastMissiles)
+NewGameWidgets(9) := GUI.CreateHorizontalSlider (134, 151, 512,0, 5120, 0, UpdateInitNeedlers)
+NewGameWidgets(10) := GUI.CreateHorizontalSlider (134, 116, 512,0, 512, 0, UpdateInitBeamMissiles)
+NewGameWidgets(11) := GUI.CreateButton (134, 32, 256,"Cancel", CancelNewGameConfig)
+NewGameWidgets(12) := GUI.CreateButton (390, 32, 256,"Launch Game", Main)

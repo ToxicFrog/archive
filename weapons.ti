@@ -1,0 +1,186 @@
+
+class Bullet
+                inherit Object
+                var fuel := 100
+                body procedure Create(ix,iy,idx,idy:real)
+                                x := ix
+                                y := iy
+                                dx := idx
+                                dy := idy
+                end Create
+                body procedure Update()
+                                dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+                                dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+                                x += dx
+                                y += dy
+        x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
+        y := y mod SCREEN_Y
+                                if abs(TrueDist(x,y,knot->data->x,knot->data->y)) < SHIP_SIZE then
+                                                Players(1).HP -= SWConf.DamagePerBullet
+                                                AddObject("explsion",x,y,3.46,6.51)
+                                                current := current->next
+                                                current->prev := current->prev->prev
+                                                rmObject(current->prev->next)
+                                                current->prev->next := current
+                                                return
+                                elsif abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
+                                                Players(2).HP -= SWConf.DamagePerBullet
+                                                AddObject("explsion",x,y,3.46,6.51)
+                                                current := current->next
+                                                current->prev := current->prev->prev
+                                                rmObject(current->prev->next)
+                                                current->prev->next := current
+                                                return
+                                elsif abs(TrueDist(x,y,SUN_X,SUN_Y)) < 16 or fuel = 0 then
+                                                current := current->next
+                                                current->prev := current->prev->prev
+                                                rmObject(current->prev->next)
+                                                current->prev->next := current
+                                                return
+                                end if
+                                fuel -= 1
+                                Draw.FillOval(round(x),round(y),1,1,0)
+                                current := current->next
+                end Update
+end Bullet
+
+class LightBeam
+        inherit Object
+        var fuel := 4
+        var tx,ty:real
+        body procedure Create(ix,iy,idx,idy:real)
+                x := ix
+                y := iy
+                dx := idx
+                dy := idy
+                for decreasing i : SWConf.LightBeamRange .. 0
+                        x+=dx
+                        y+=dy
+                        if abs(TrueDist(x,y,knot->data->x,knot->data->y))< SHIP_SIZE-2 or abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y))< SHIP_SIZE-2 then
+                                exit
+                        end if
+                end for
+                tx := x
+                ty := y
+                x := ix
+                y := iy
+        end Create
+        body procedure Update()
+                                fuel -= 1
+                if fuel < 1 then
+                                current := current->next
+                                current->prev := current->prev->prev
+                                rmObject(current->prev->next)
+                                current->prev->next := current
+                        return
+                end if    
+            Beam(round(x),round(y),round(tx),round(ty),51,56,fuel)
+                        BlowItUp(round(tx),round(ty),2,5,5,8,51,56,2,3,3)
+                if abs(TrueDist(tx,ty,knot->data->x,knot->data->y)) < SHIP_SIZE then
+                        Players(1).HP -= SWConf.DamagePerLightBeam
+                        current := current->next
+                        return
+                elsif abs(TrueDist(tx,ty,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
+                        Players(2).HP -= SWConf.DamagePerLightBeam
+                        %Beam(round(x),round(y),round(tx),round(ty),51,56,fuel)
+                        %BlowItUp(round(tx),round(ty),2,5,5,8,51,56,8,3,3)
+                        current := current->next
+                        return
+                end if
+
+                current := current->next
+        end Update
+end LightBeam
+class HeavyBeam
+        inherit Object
+        var fuel := 10
+        var tx,ty:real
+        body procedure Create(ix,iy,idx,idy:real)
+                x := ix
+                y := iy
+                dx := idx
+                dy := idy
+                for decreasing i : SWConf.HeavyBeamRange .. 0
+                        x+=dx
+                        y+=dy
+                        if abs(TrueDist(x,y,knot->data->x,knot->data->y))< SHIP_SIZE-2 or abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y))< SHIP_SIZE-2 then
+                                exit
+                        end if
+                end for
+                tx := x
+                ty := y
+                x := ix
+                y := iy
+        end Create
+        body procedure Update()
+                                fuel -= 1
+                if fuel < 1 then
+                                current := current->next
+                                current->prev := current->prev->prev
+                                rmObject(current->prev->next)
+                                current->prev->next := current
+                        return
+                end if    
+            Beam(round(x),round(y),round(tx),round(ty),51,56,fuel)
+                        BlowItUp(round(tx),round(ty),2,5,5,8,51,56,2,3,3)
+                if abs(TrueDist(tx,ty,knot->data->x,knot->data->y)) < SHIP_SIZE then
+                        Players(1).HP -= SWConf.DamagePerHeavyBeam
+                        current := current->next
+                        return
+                elsif abs(TrueDist(tx,ty,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
+                        Players(2).HP -= SWConf.DamagePerHeavyBeam
+                        %Beam(round(x),round(y),round(tx),round(ty),51,56,fuel)
+                        %BlowItUp(round(tx),round(ty),2,5,5,8,51,56,8,3,3)
+                        current := current->next
+                        return
+                end if
+
+                current := current->next
+        end Update
+end HeavyBeam
+
+class MiniBeam
+        inherit Object
+        var fuel := 3
+        var tx,ty:real
+        body procedure Create(ix,iy,idx,idy:real)
+                x := ix
+                y := iy
+                dx := idx
+                dy := idy
+                for decreasing i : SWConf.MiniBeamRange .. 0
+                        x+=dx
+                        y+=dy
+                        if abs(TrueDist(x,y,knot->data->x,knot->data->y))< SHIP_SIZE-2 or abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y))< SHIP_SIZE-2 then
+                                exit
+                        end if
+                end for
+                tx := x
+                ty := y
+                x := ix
+                y := iy
+        end Create
+        body procedure Update()
+                                fuel -= 1
+                if fuel < 1 then
+                                current := current->next
+                                current->prev := current->prev->prev
+                                rmObject(current->prev->next)
+                                current->prev->next := current
+                        return
+                end if    
+            Beam(round(x),round(y),round(tx),round(ty),51,56,fuel)
+                        BlowItUp(round(tx),round(ty),2,5,5,8,51,56,2,3,3)
+                if abs(TrueDist(tx,ty,knot->data->x,knot->data->y)) < SHIP_SIZE then
+                        Players(1).HP -= SWConf.DamagePerMiniBeam
+                        current := current->next
+                        return
+                elsif abs(TrueDist(tx,ty,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
+                        Players(2).HP -= SWConf.DamagePerMiniBeam
+                        current := current->next
+                        return
+                end if
+
+                current := current->next
+        end Update
+end MiniBeam

@@ -1,0 +1,93 @@
+
+body procedure Main()
+    ExitConditions := false
+    for i : 1..12
+        GUI.Hide(NewGameWidgets(i))
+    end for
+    GUI.Refresh
+    %create the players
+    new Player, knot->data
+    knot->data->Create(Rand.Int(STATUS_BAR_SIZE+SHIP_SIZE,SCREEN_X-SHIP_SIZE),Rand.Int(SHIP_SIZE,SCREEN_Y-SHIP_SIZE),90,1)
+    new Player, knot->next->data
+    knot->next->data->Create(Rand.Int(STATUS_BAR_SIZE+SHIP_SIZE,SCREEN_X-SHIP_SIZE),Rand.Int(SHIP_SIZE,SCREEN_Y-SHIP_SIZE),90,2)
+    new knot->prev
+    new ViewUpdater, knot->prev->data
+    knot->prev->next := knot
+    knot->prev->prev := knot->next
+    knot->next->next := knot->prev
+    Text.Color(0)
+    Text.ColorBack(7)
+    %final initialization
+    Players(1).HP := SWConf.PlayerHP
+    Players(1).kills := 0
+    Players(1).deaths := 0
+    Players(1).weapon := 1
+    Players(1).altweapon := 1
+    Players(1).weapons(1) := SWConf.InitMassDriver
+    Players(1).weapons(2) := SWConf.InitWMassDriver
+    Players(1).weapons(3) := SWConf.InitXRL
+    Players(1).weapons(4) := SWConf.InitBrightLance
+    Players(1).ammo(1) := SWConf.InitImpactMissiles
+    Players(1).ammo(2) := SWConf.InitBlastMissiles
+    Players(1).ammo(3) := SWConf.InitNeedlers
+    Players(1).ammo(4) := SWConf.InitBeamMissiles
+    Players(2).HP := SWConf.PlayerHP
+    Players(2).kills := 0
+    Players(2).deaths := 0
+    Players(2).weapon := 1
+    Players(2).altweapon := 1
+    Players(2).ammo(1) := SWConf.InitImpactMissiles
+    Players(2).ammo(2) := SWConf.InitBlastMissiles
+    Players(2).ammo(3) := SWConf.InitNeedlers
+    Players(2).ammo(4) := SWConf.InitBeamMissiles
+    Players(2).weapons(1) := SWConf.InitMassDriver
+    Players(2).weapons(2) := SWConf.InitWMassDriver
+    Players(2).weapons(3) := SWConf.InitXRL
+    Players(2).weapons(4) := SWConf.InitBrightLance
+    var TimeStamp : int := 0
+    loop
+        current->data->Update()
+        exit when ExitConditions
+    end loop
+    ExitCall := true
+    if input(chr(27)) then
+        return
+    else
+        case Rand.Int(1,399) div 100 of
+            label 0: Pic.Draw(MainMenuBG,0,0,0)
+            label 1: Pic.Draw(ConfigBG,0,0,0)
+            label 2: Pic.Draw(NewGameBG,0,0,0)
+            label 3: Pic.Draw(HelpBG,0,0,0)
+        end case
+    end if
+    View.Set("graphics:xor")
+    if Players(1).kills >= SWConf.KillsToWin or Players(2).deaths >= SWConf.DeathsToLose then
+        Font.Draw ("PLAYER 1 IS VICTORIOUS!", 42, 650, FontMain, white)
+    else
+        Font.Draw ("PLAYER 2 IS VICTORIOUS!", 42, 650, FontMain, white)
+    end if
+    View.Update
+    Time.Delay(1000)
+        Input.KeyDown(input)
+        if input('l') and input('g') and input('s') then
+            cls
+            Pic.ScreenLoad("images/SHODAN.bmp",0,78,0)
+            View.Update
+            Music.PlayFile("wav/SHODAN.wav")
+        elsif input('f') and input(chr(193)) then
+            cls
+            Pic.ScreenLoad("images/midgar.bmp",0,112,0)
+            View.Update
+            Music.PlayFile("wav/fanfare.wav")
+        elsif input('m') and input('t') and input('g') then
+            cls
+            Pic.ScreenLoad("images/tolarian_winds.bmp",0,56,0)
+            View.Update
+            Music.PlayFile("wav/burning.wav")
+        end if
+    Font.Draw("PRESS ANY KEY",1,1,FontSub,white)
+    View.Update
+    loop
+        exit when hasch
+    end loop
+end Main

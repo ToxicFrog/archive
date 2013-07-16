@@ -1,0 +1,82 @@
+
+type PlayerStats : record
+        HP : int
+        name : string(64)
+        kills : int
+        deaths : int
+        weapon : int
+        altweapon : int
+        weapons : array 1 .. 4 of boolean
+        ammo : array 1 .. 4 of int
+end record
+
+type *node : record
+        next : ^node
+        prev : ^node
+        data : ^Object
+end record
+
+type Weapon : record
+    Name : string(8)
+    ROF : int
+    Variance : int
+    Velocity : int
+    Dependency : int
+    Cooldown : int
+    Image : int
+end record
+
+type Configuration : record
+        PlayerHP : int
+        PlayerAccel : real
+        Player1Color : int
+        Player2Color : int
+
+        DamagePerBullet : int
+        DamagePerMiniBeam : int
+        DamagePerLightBeam : int
+        DamagePerHeavyBeam : int
+        DamagePerMissileImpact : int
+        DamagePerMissileBlast : int
+        DamagePerMissileNeedler : int           
+        
+        MiniBeamRange : int
+        LightBeamRange : int
+        HeavyBeamRange : int
+        MissileImpactAccel : real
+        MissileBlastAccel : real
+        MissileNeedlerAccel : real
+        MissileBeamAccel : real
+
+        Gravity : real
+        
+        KillsToWin : int
+        DeathsToLose : int
+        MissilesPerPack : int
+        
+        InitMassDriver : boolean
+        InitWMassDriver : boolean
+        InitXRL : boolean
+        InitBrightLance : boolean
+        
+        InitImpactMissiles : int
+        InitBlastMissiles : int
+        InitNeedlers : int
+        InitBeamMissiles : int
+        
+        Key1Up : char
+        Key1Lf : string(1)
+        Key1Rt : string(1)
+        Key1Gun : string(1)
+        Key1Msl : string(1)
+        Key1NextGun : string(1)
+        Key1NextMsl : string(1)
+        
+        Key2Up : string(1)
+        Key2Lf : string(1)
+        Key2Rt : string(1)
+        Key2Gun : string(1)
+        Key2Msl : string(1)
+        Key2NextGun : string(1)
+        Key2NextMsl : string(1)
+end record

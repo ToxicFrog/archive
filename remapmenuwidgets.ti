@@ -1,0 +1,206 @@
+var RemapWidgets : array 1 .. 15 of int
+
+procedure Cpause
+    loop
+        exit when hasch
+    end loop
+    return
+end Cpause
+procedure LockAllRemapWidgets
+    for i : 1 .. 15
+        GUI.Disable(RemapWidgets(i))
+    end for
+    View.Update
+end LockAllRemapWidgets
+procedure UnockAllRemapWidgets
+    for i : 1 .. 15
+        GUI.Enable(RemapWidgets(i))
+    end for
+    View.Update
+end UnockAllRemapWidgets
+
+procedure Remap1Up()
+    LockAllRemapWidgets
+    Cpause
+    SWConf.Key1Up := getchar
+    GUI.Dispose(RemapWidgets(1))
+    RemapWidgets(1) := GUI.CreateButton(200,550,64,SWConf.Key1Up,Remap1Up)
+    GUI.Show(RemapWidgets(1))
+    UnockAllRemapWidgets
+    GUI.Refresh
+    View.Update
+    return
+end Remap1Up
+procedure Remap1Lf()
+    LockAllRemapWidgets
+    Cpause
+    SWConf.Key1Lf := getchar
+    GUI.Dispose(RemapWidgets(2))
+    RemapWidgets(2) := GUI.CreateButton(200,500,64,SWConf.Key1Lf,Remap1Lf)
+    GUI.Show(RemapWidgets(2))
+    UnockAllRemapWidgets
+    GUI.Refresh
+    View.Update
+    return
+end Remap1Lf
+procedure Remap1Rt()
+    LockAllRemapWidgets
+    Cpause
+    SWConf.Key1Rt := getchar
+    GUI.Dispose(RemapWidgets(3))
+    RemapWidgets(3) := GUI.CreateButton(200,450,64,SWConf.Key1Rt,Remap1Rt)
+    GUI.Show(RemapWidgets(3))
+    UnockAllRemapWidgets
+    GUI.Refresh
+    View.Update
+    return
+end Remap1Rt
+procedure Remap1Gun()
+    LockAllRemapWidgets
+    Cpause
+    SWConf.Key1Gun := getchar
+    GUI.Dispose(RemapWidgets(4))
+    RemapWidgets(4) := GUI.CreateButton(200,400,64,SWConf.Key1Gun,Remap1Gun)
+    GUI.Show(RemapWidgets(4))
+    UnockAllRemapWidgets
+    GUI.Refresh
+    View.Update
+    return
+end Remap1Gun
+procedure Remap1Msl()
+    LockAllRemapWidgets
+    Cpause
+    SWConf.Key1Msl := getchar
+    GUI.Dispose(RemapWidgets(5))
+    RemapWidgets(5) := GUI.CreateButton(200,350,64,SWConf.Key1Msl,Remap1Msl)
+    GUI.Show(RemapWidgets(5))
+    UnockAllRemapWidgets
+    GUI.Refresh
+    View.Update
+    return
+end Remap1Msl
+procedure Remap1NextGun()
+    LockAllRemapWidgets
+    Cpause
+    SWConf.Key1NextGun := getchar
+    GUI.Dispose(RemapWidgets(6))
+    RemapWidgets(6) := GUI.CreateButton(200,300,64,SWConf.Key1NextGun,Remap1NextGun)
+    GUI.Show(RemapWidgets(6))
+    UnockAllRemapWidgets
+    GUI.Refresh
+    View.Update
+    return
+end Remap1NextGun
+procedure Remap1NextMsl()
+    LockAllRemapWidgets
+    Cpause
+    SWConf.Key1NextMsl := getchar
+    GUI.Dispose(RemapWidgets(7))
+    RemapWidgets(7) := GUI.CreateButton(200,250,64,SWConf.Key1Msl,Remap1NextMsl)
+    GUI.Show(RemapWidgets(7))
+    UnockAllRemapWidgets
+    GUI.Refresh
+    View.Update
+    return
+end Remap1NextMsl
+
+procedure Remap2Up()
+    LockAllRemapWidgets
+    Cpause
+    SWConf.Key2Up := getchar
+    GUI.Dispose(RemapWidgets(8))
+    RemapWidgets(8) := GUI.CreateButton(508,550,64,SWConf.Key1Up,Remap1Up)
+    GUI.Show(RemapWidgets(8))
+    UnockAllRemapWidgets
+    GUI.Refresh
+    View.Update
+    return
+end Remap2Up
+procedure Remap2Lf()
+    LockAllRemapWidgets
+    Cpause
+    SWConf.Key2Lf := getchar
+    GUI.Dispose(RemapWidgets(9))
+    RemapWidgets(9) := GUI.CreateButton(508,500,64,SWConf.Key2Lf,Remap2Lf)
+    GUI.Show(RemapWidgets(9))
+    UnockAllRemapWidgets
+    GUI.Refresh
+    View.Update
+    return
+end Remap2Lf
+procedure Remap2Rt()
+    LockAllRemapWidgets
+    Cpause
+    SWConf.Key2Rt := getchar
+    GUI.Dispose(RemapWidgets(10))
+    RemapWidgets(10) := GUI.CreateButton(508,450,64,SWConf.Key2Rt,Remap2Rt)
+    GUI.Show(RemapWidgets(10))
+    UnockAllRemapWidgets
+    GUI.Refresh
+    View.Update
+    return
+end Remap2Rt
+procedure Remap2Gun()
+    LockAllRemapWidgets
+    Cpause
+    SWConf.Key2Gun := getchar
+    GUI.Dispose(RemapWidgets(11))
+    RemapWidgets(11) := GUI.CreateButton(508,400,64,SWConf.Key2Gun,Remap2Gun)
+    GUI.Show(RemapWidgets(11))
+    UnockAllRemapWidgets
+    GUI.Refresh
+    View.Update
+    return
+end Remap2Gun
+procedure Remap2Msl()
+    LockAllRemapWidgets
+    Cpause
+    SWConf.Key2Msl := getchar
+    GUI.Dispose(RemapWidgets(12))
+    RemapWidgets(12) := GUI.CreateButton(508,350,64,SWConf.Key2Msl,Remap2Msl)
+    GUI.Show(RemapWidgets(12))
+    UnockAllRemapWidgets
+    GUI.Refresh
+    View.Update
+    return
+end Remap2Msl
+procedure Remap2NextGun()
+    LockAllRemapWidgets
+    Cpause
+    SWConf.Key2NextGun := getchar
+    GUI.Dispose(RemapWidgets(13))
+    RemapWidgets(13) := GUI.CreateButton(508,300,64,SWConf.Key2NextGun,Remap2NextGun)
+    GUI.Show(RemapWidgets(13))
+    UnockAllRemapWidgets
+    GUI.Refresh
+    View.Update
+    return
+end Remap2NextGun
+procedure Remap2NextMsl()
+    LockAllRemapWidgets
+    Cpause
+    SWConf.Key2NextMsl := getchar
+    GUI.Dispose(RemapWidgets(14))
+    RemapWidgets(14) := GUI.CreateButton(508,250,64,SWConf.Key2Msl,Remap2NextMsl)
+    GUI.Show(RemapWidgets(14))
+    UnockAllRemapWidgets
+    GUI.Refresh
+    View.Update
+    return
+end Remap2NextMsl
+
+RemapWidgets(1) := GUI.CreateButton(200,550,64,SWConf.Key1Up,Remap1Up)
+RemapWidgets(2) := GUI.CreateButton(200,500,64,SWConf.Key1Lf,Remap1Lf)
+RemapWidgets(3) := GUI.CreateButton(200,450,64,SWConf.Key1Rt,Remap1Rt)
+RemapWidgets(4) := GUI.CreateButton(200,400,64,SWConf.Key1Gun,Remap1Gun)
+RemapWidgets(5) := GUI.CreateButton(200,350,64,SWConf.Key1Msl,Remap1Msl)
+RemapWidgets(6) := GUI.CreateButton(200,300,64,SWConf.Key1NextGun,Remap1NextGun)
+RemapWidgets(7) := GUI.CreateButton(200,250,64,SWConf.Key1Msl,Remap1NextMsl)
+RemapWidgets(8) := GUI.CreateButton(508,550,64,SWConf.Key2Up,Remap2Up)
+RemapWidgets(9) := GUI.CreateButton(508,500,64,SWConf.Key2Lf,Remap2Lf)
+RemapWidgets(10) := GUI.CreateButton(508,450,64,SWConf.Key2Rt,Remap2Rt)
+RemapWidgets(11) := GUI.CreateButton(508,400,64,SWConf.Key2Gun,Remap2Gun)
+RemapWidgets(12) := GUI.CreateButton(508,350,64,SWConf.Key2Msl,Remap2Msl)
+RemapWidgets(13) := GUI.CreateButton(508,300,64,SWConf.Key2NextGun,Remap2NextGun)
+RemapWidgets(14) := GUI.CreateButton(508,250,64,SWConf.Key2NextMsl,Remap2NextMsl)
+RemapWidgets(15) := GUI.CreateButton(300,150,172,"Back to Main Menu",CancelNewGameConfig)

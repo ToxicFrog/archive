@@ -1,0 +1,6 @@
+var MainMenuButtons : array 1 .. 5 of int
+MainMenuButtons(1) := GUI.CreateButton (250,400 , 256, "New Game", StartNewGame)
+MainMenuButtons(2) := GUI.CreateButton (250,350 , 256, "Configuration", ChangeConfig)
+MainMenuButtons(3) := GUI.CreateButton (250,300 , 256, "Remap Controls", RemapKeys)
+MainMenuButtons(4) := GUI.CreateButton (250,250 , 256, "Help", ShowHelp)
+MainMenuButtons(5) := GUI.CreateButton (250,150 , 256, "Exit", GUI.Quit)

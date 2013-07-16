@@ -1,0 +1,32 @@
+MISSILES
+
+IMPACTER
+The Impacter is armed with a small shaped charge as its warhead. It is designed
+to ram the enemy ship and then detonate, punching a hole in its hull. The advent
+of shields means that several hits may be necessary to disable your target, as
+the missile is no longer able to cripple its target with a single blast.
+
+TCPW (TOTAL CONVERSION, PROXIMITY WARHEAD) MISSILE
+The TCPW holds a few grams of antimatter sealed in a force field. When its
+onboard sensors detect a nearby enemy, the forcefield is shut off, allowing the
+antimatter to come into contact with the body of the missile. This converts the
+antimatter and the missile completely into energy, hence the "Total Conversion"
+part of its name. Note that unlike the Impacter, the TCPW does not need physical
+contact to detonate. The blast will damage ALL nearby ships -- not just the
+intended target.
+
+NEEDLER
+These are small, high-velocity missiles. They carry small warheads and very
+little fuel -- in fact, they do less damage than the mass driver. Their main
+strength is the fact that their small size allows them to be mounted in clusters,
+with 10 needlers taking the place of 1 larger missile. This allows them to be
+fired very rapidly, making them almost impossible to dodge. Their small fuel
+supply, however, means that if they miss on the first pass, they typically won't
+have time for a second.
+
+BEAMER
+This is a modified TCPW. Taking the place of the antimatter warhead and
+forcefield generator is a  very small X-ray laser projector. Rather than
+exploding as it nears its target, it fires the beam continously. The beam does
+almost no damage, but the beamer is relentless, and two or three of them can
+finish almost anyone.

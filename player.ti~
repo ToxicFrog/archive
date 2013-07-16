@@ -1,0 +1,141 @@
+class Player
+    inherit Object
+    import Input
+    var theta : int := 90
+    var KeyFwd : char := SWConf.Key1Up
+    var KeyRt : char := SWConf.Key1Rt
+    var KeyLf : char := SWConf.Key1Lf
+    var KeyFir : char := SWConf.Key1Gun
+    var KeyMsl : char := SWConf.Key1Msl
+    var KeyNextPrimary : char := SWConf.Key1NextGun
+    var KeyNextSecondary : char := SWConf.Key1NextMsl
+    var PID : int := 1
+    var cooldown : int := 0
+    var deathcounter : int := 0
+    body procedure Create(ix,iy,idx,idy:real)
+        x := ix
+        y := iy
+        dy := 0
+        dx := 0
+        theta := round(idx)
+        if idy = 1 then
+            KeyFwd := SWConf.Key1Up
+            KeyRt := SWConf.Key1Rt
+            KeyLf := SWConf.Key1Lf
+            KeyFir := SWConf.Key1Gun
+            KeyMsl := SWConf.Key1Msl
+            KeyNextPrimary := SWConf.Key1NextGun
+            KeyNextSecondary := SWConf.Key1NextMsl
+        else
+            KeyFwd := SWConf.Key2Up
+            KeyRt := SWConf.Key2Rt
+            KeyLf := SWConf.Key2Lf
+            KeyFir := SWConf.Key2Gun
+            KeyMsl := SWConf.Key2Msl
+            KeyNextPrimary := SWConf.Key2NextGun
+            KeyNextSecondary := SWConf.Key2NextMsl
+            PID := 2
+        end if
+    end Create
+    body procedure Update()
+        cooldown := max(0,cooldown-1)
+        theta += 5*cheat(int1,input(KeyLf))
+        theta -= 5*cheat(int1,input(KeyRt))
+        dx += ComponentX(SWConf.PlayerAccel,theta)*cheat(int1,input(KeyFwd))
+        dy += ComponentY(SWConf.PlayerAccel,theta)*cheat(int1,input(KeyFwd))
+        dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+        dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+        x += dx
+        y += dy
+        x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
+        y := y mod SCREEN_Y
+        if cheat(boolean,deathcounter) then
+            deathcounter -= 1
+            BlowItUp(round(x),round(y),2,8,8,16,39,42,1,SHIP_SIZE,SHIP_SIZE)
+            if ~cheat(boolean,deathcounter) then
+                BlowItUp(round(x),round(y),2,16,16,32,39,44,24,20,20)
+                AddObject("box"+intstr(Rand.Int(0,9)),x,y,dx,dy)
+                x := Rand.Int(STATUS_BAR_SIZE+SHIP_SIZE,SCREEN_X-SHIP_SIZE)
+                y := Rand.Int(SHIP_SIZE,SCREEN_Y-SHIP_SIZE)
+                dx := Rand.Real-0.5
+                dy := Rand.Real-0.5
+                AddObject("explsion", x, y, 3.0,SHIP_SIZE*2+1.0)
+                AddObject("explsion", x, y, 2.0,SHIP_SIZE*2+1.0)
+                AddObject("explsion", x, y, 1.0,SHIP_SIZE*2+1.0)
+                AddObject("explsion", x, y, 0.07,SHIP_SIZE*2+0.07)
+                Players(PID).HP := SWConf.PlayerHP
+                Players(PID).weapons(1) := SWConf.InitMassDriver
+                Players(PID).weapons(2) := SWConf.InitWMassDriver
+                Players(PID).weapons(3) := SWConf.InitXRL
+                Players(PID).weapons(4) := SWConf.InitBrightLance
+                Players(PID).ammo(1) := SWConf.InitImpactMissiles
+                Players(PID).ammo(2) := SWConf.InitBlastMissiles
+                Players(PID).ammo(3) := SWConf.InitNeedlers
+                Players(PID).ammo(4) := SWConf.InitBeamMissiles
+                
+            end if
+            current := current->next
+            return
+        end if
+        if abs(TrueDist(x,y,SUN_X,SUN_Y)) < 32 then
+            BlowItUp(round(x),round(y),2,16,16,32,39,44,24,20,20)
+            Players(PID).kills -= 1
+            Players(PID).deaths += 1
+            deathcounter := 20
+            current := current->next
+            return
+        elsif Players(PID).HP < 1 then
+            deathcounter := 120
+            current := current->next
+            Players(3-PID).kills += 1
+            Players(PID).deaths += 1
+            return
+        end if
+        if input(KeyFwd) then
+            AddObject("explsion", Rand.Int(round(x)-4,round(x)+4)+round(ComponentX(6,theta+180 mod 360)), Rand.Int(round(y)-4,round(y)+4)+round(ComponentY(6,theta+180 mod 360)), 8.39,9.43)
+        end if
+        if cooldown = 0 then
+            if input(KeyFir) and Players(PID).weapons(Players(PID).weapon) then
+                for i : 1 .. Primaries(Players(PID).weapon).ROF
+                AddObject(Primaries(Players(PID).weapon).Name, x-dx*Primaries(Players(PID).weapon).Dependency+ComponentX(SHIP_SIZE+1,theta+round(arctand(.25))*Primaries(Players(PID).weapon).Variance), y-dy*Primaries(Players(PID).weapon).Dependency+ComponentY(SHIP_SIZE+1,theta+round(arctand(.25))*Primaries(Players(PID).weapon).Variance), dx*Primaries(Players(PID).weapon).Dependency+ComponentX(Primaries(Players(PID).weapon).Velocity,theta), dy*Primaries(Players(PID).weapon).Dependency+ComponentY(Primaries(Players(PID).weapon).Velocity,theta))
+                Primaries(Players(PID).weapon).Variance *= -1
+                end for
+                AddObject("explsion", x+ComponentX(SHIP_SIZE+1,theta-round(arctand(.25))), y+ComponentY(SHIP_SIZE+1,theta-round(arctand(.25))), 3.51,3.56)
+                AddObject("explsion", x+ComponentX(SHIP_SIZE+1,theta+round(arctand(.25))), y+ComponentY(SHIP_SIZE+1,theta+round(arctand(.25))), 3.51,3.56)
+                cooldown := Primaries(Players(PID).weapon).Cooldown
+            end if
+            if input(KeyMsl) and Players(PID).ammo(Players(PID).altweapon) > 0 then
+                Players(PID).ammo(Players(PID).altweapon) -= 1
+                for i : 1 .. Secondaries(Players(PID).altweapon).ROF
+                    AddObject(Secondaries(Players(PID).altweapon).Name, x-dx*Primaries(Players(PID).weapon).Dependency+ComponentX(SHIP_SIZE+1,theta+round(arctand(.25))*Secondaries(Players(PID).altweapon).Variance)+3000-PID*1000, y-dy*Primaries(Players(PID).weapon).Dependency+ComponentY(SHIP_SIZE+1,theta+round(arctand(.25))*Secondaries(Players(PID).altweapon).Variance), dx*Secondaries(Players(PID).altweapon).Dependency+ComponentX(Secondaries(Players(PID).altweapon).Velocity,theta), dy*Secondaries(Players(PID).altweapon).Dependency+ComponentY(Secondaries(Players(PID).altweapon).Velocity,theta))
+                Secondaries(Players(PID).altweapon).Variance *= -1
+                end for
+                AddObject("explsion", x+ComponentX(SHIP_SIZE+1,theta-round(arctand(.25))), y+ComponentY(SHIP_SIZE+1,theta-round(arctand(.25))), 3.51,3.56)
+                AddObject("explsion", x+ComponentX(SHIP_SIZE+1,theta+round(arctand(.25))), y+ComponentY(SHIP_SIZE+1,theta+round(arctand(.25))), 3.51,3.56)
+                cooldown := Secondaries(Players(PID).altweapon).Cooldown
+            end if
+            if input(KeyNextPrimary) then
+                for i : 1 .. 4
+                    Players(PID).weapon := Players(PID).weapon mod 4 + 1
+                    exit when Players(PID).weapons(Players(PID).weapon)
+                end for
+                cooldown := 30
+            end if
+            if input(KeyNextSecondary) then
+                for i : 1 .. 4
+                    Players(PID).altweapon := Players(PID).altweapon mod 4 + 1
+                    exit when Players(PID).ammo(Players(PID).altweapon) > 0
+                end for
+                cooldown := 30
+            end if
+            
+        end if
+        if PID = 1 then
+            DrawPlayer(x,y,theta,SWConf.Player1Color,round((Players(1).HP/SWConf.PlayerHP)*16)+15)
+        else
+            DrawPlayer(x,y,theta,SWConf.Player2Color,round((Players(2).HP/SWConf.PlayerHP)*16)+15)
+        end if
+        current := current->next
+    end Update
+end Player
+

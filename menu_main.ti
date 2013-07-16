@@ -1,0 +1,18 @@
+%import GUI in "%oot/lib/GUI"
+%setscreen ( "graphics:780;740" ) 
+
+%variable declarations
+%var font1 : int := Font.New ("impact:36")
+%var background : int := Pic.FileNew ("h:/turing/project/MainMenu.bmp")
+
+%Pic.Draw (background, 1, 1, 0)
+Font.Draw ("MAIN MENU", 275, 650, Font.New ("impact:36"), white)
+
+var NewGameButton := GUI.CreateButton (250,500 , 250, "New Game", GUI.Quit)
+var ConfigurationButton := GUI.CreateButton (250,450 , 250, "Configuration", GUI.Quit)
+var HelpButton := GUI.CreateButton (250,400 , 250, "Help", GUI.Quit)
+var ExitButton := GUI.CreateButton (250,350 , 250, "Exit", GUI.Quit)
+
+loop
+    exit when GUI.ProcessEvent
+end loop

@@ -1,0 +1,52 @@
+body procedure rmObject(var victim : ^node)
+                free victim->data
+                free victim
+end rmObject
+body procedure AddObject(ObjType : string(8), x,y,dx,dy:real)
+    var tmp : ^node := knot->prev
+    new knot->prev
+    case ObjType of
+        label "bullet":
+            new Bullet, knot->prev->data
+        label "minibeam":
+            new MiniBeam, knot->prev->data
+        label "lghtbeam":
+            new LightBeam, knot->prev->data
+        label "hvybeam":
+            new HeavyBeam, knot->prev->data
+        label "explsion":
+            new Explosion, knot->prev->data
+        label "mslimpct":
+            new Missile_Impact, knot->prev->data
+        label "mslblast":
+            new Missile_Blast, knot->prev->data
+        label "needler":
+            new Needler, knot->prev->data
+        label "mslbeam":
+            new Missile_Beam, knot->prev->data
+        label "box0":
+            new Box_MassDriver, knot->prev->data
+        label "box1":
+            new Box_WMassDriver, knot->prev->data
+        label "box2":
+            new Box_XRL, knot->prev->data
+        label "box3":
+            new Box_BrightLance, knot->prev->data
+        label "box4":
+            new Box_Impacter, knot->prev->data
+        label "box5":
+            new Box_TCPW, knot->prev->data
+        label "box6":
+            new Box_Needler, knot->prev->data
+        label "box7":
+            new Box_Beamer, knot->prev->data
+        label "box8","box9":
+            new Box_Health, knot->prev->data
+        label:
+            return
+    end case
+    knot->prev->data->Create(x,y,dx,dy)
+    knot->prev->prev := tmp
+    knot->prev->next := knot
+    tmp->next := knot->prev
+end AddObject

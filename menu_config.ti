@@ -1,0 +1,319 @@
+import GUI in "%oot/lib/GUI"
+setscreen("graphics:780;740")
+colorback(7)
+cls
+%variable declarations
+var options : array 1 .. 23 of string := init ("PlayerHP", "PlayerAccel", "Player1Color", "Player2Color", "DamagePerBullet", "BulletFuel", "DamagePerMiniBeam", "DamagePerLightBeam", "DamgePerHeavyBeam","DamagePerMissileImpact","DamagePerMissileBlast","DamagePerMissileNeedler","DamagePerMissileBeam","ImpactMissileAccel","BlastMissileAccel","NeedlerMissileAccel","BeamMissileAccel","PointsToWin","DeathsToLose","MissilesPerPack","ItemPackDelay","MissilePackRatio","Gravity")
+var default_settings : array 1 .. 23 of string := init ("range: 1-9999 ","range: 1-800 ","range: 0-255 ","range: 0-255 ","range: 1-9999 ","range: 30-900 ","range: 1-9999 ","range: 1-9999 ","range: 1-9999 ","range: 1-9999 ","range: 1-9999 ","range: 1-9999 ","range: 1-9999 ","range: 1-800 ","range: 1-800 ","range: 1-800 ","range: 1-800 ","range: 1-1024 ","range: 1-1024 ","range: 1-1024 ","range: 30-18000 ","range: 0-255 ","range: 1-1000 ",)
+var background : int := Pic.FileNew ("h:/turing/project/Config.bmp")
+var PlayerHP, PlayerAccel, Player1Color, Player2Color, DamagePerBullet, BulletFuel, DamagePerMiniBeam, DamagePerLightBeam, DamgePerHeavyBeam,DamagePerMissileImpact,DamagePerMissileBlast,DamagePerMissileNeedler,DamagePerMissileBeam,ImpactMissileAccel,BlastMissileAccel,NeedlerMissileAccel,BeamMissileAccel,PointsToWin,DeathsToLose,MissilesPerPack,ItemPackDelay,MissilePackRatio,Gravity:int
+var PlayerHPTextField, PlayerAccelTextField, Player1ColorTextField, Player2ColorTextField, DamagePerBulletTextField, BulletFuelTextField, DamagePerMiniBeamTextField, DamagePerLightBeamTextField, DamgePerHeavyBeamTextField,DamagePerMissileImpactTextField,DamagePerMissileBlastTextField,DamagePerMissileNeedlerTextField,DamagePerMissileBeamTextField,ImpactMissileAccelTextField,BlastMissileAccelTextField,NeedlerMissileAccelTextField,BeamMissileAccelTextField,PointsToWinTextField,DeathsToLoseTextField,MissilesPerPackTextField,ItemPackDelayTextField,MissilePackRatioTextField,GravityTextField:int % The Text Field IDs.
+var hp,bd,md,pa,pv,ma,mv,mf,gs:int:=0
+var y : int := 655
+var font1 : int := Font.New ("impact:12")
+var font2 : int := Font.New ("impact:8")
+var font3 : int := Font.New ("impact:32")
+type ar : record
+    ImpactMissileAccel : real
+end record
+var SWConf : ar
+SWConf.ImpactMissileAccel := 1
+%main program
+%Pic.Draw (background, 1, 1, 0)
+Text.Color (0)
+
+procedure PlayerHPEntered (text : string)
+    GUI.SetSelection (PlayerHPTextField, 0, 0)
+    GUI.SetActive (PlayerHPTextField)
+end PlayerHPEntered
+
+procedure PlayerAccelEntered (text : string)
+    GUI.SetSelection (PlayerAccelTextField, 0, 0)
+    GUI.SetActive (PlayerAccelTextField)
+end PlayerAccelEntered
+
+procedure Player1ColorEntered (text : string)
+    GUI.SetSelection (Player1ColorTextField, 0, 0)
+    GUI.SetActive (Player1ColorTextField)
+end Player1ColorEntered
+
+procedure Player2ColorEntered (text : string)
+    GUI.SetSelection (Player2ColorTextField, 0, 0)
+    GUI.SetActive (Player2ColorTextField)
+end Player2ColorEntered
+
+procedure DamagePerBulletEntered (text : string)
+    GUI.SetSelection (DamagePerBulletTextField, 0, 0)
+    GUI.SetActive (DamagePerBulletTextField)
+end DamagePerBulletEntered
+
+procedure BulletFuelEntered (text : string)
+    GUI.SetSelection (BulletFuelTextField, 0, 0)
+    GUI.SetActive (BulletFuelTextField)
+end BulletFuelEntered
+
+procedure DamagePerMiniBeamEntered (text : string)
+    GUI.SetSelection (DamagePerMiniBeamTextField, 0, 0)
+    GUI.SetActive (DamagePerMiniBeamTextField)
+end DamagePerMiniBeamEntered
+
+procedure DamagePerLightBeamEntered (text : string)
+    GUI.SetSelection (DamagePerLightBeamTextField, 0, 0)
+    GUI.SetActive (DamagePerLightBeamTextField)
+end DamagePerLightBeamEntered
+
+procedure DamgePerHeavyBeamEntered (text : string)
+    GUI.SetSelection (DamgePerHeavyBeamTextField, 0, 0)
+    GUI.SetActive (DamgePerHeavyBeamTextField)
+end DamgePerHeavyBeamEntered
+
+procedure DamagePerMissileImpactEntered (text : string)
+    GUI.SetSelection (DamagePerMissileImpactTextField, 0, 0)
+    GUI.SetActive (DamagePerMissileImpactTextField)
+end DamagePerMissileImpactEntered
+
+procedure DamagePerMissileBlastEntered (text : string)
+    GUI.SetSelection (DamagePerMissileBlastTextField, 0, 0)
+    GUI.SetActive (DamagePerMissileBlastTextField)
+end DamagePerMissileBlastEntered
+
+procedure DamagePerMissileNeedlerEntered (text : string)
+    GUI.SetSelection (DamagePerMissileNeedlerTextField, 0, 0)
+    GUI.SetActive (DamagePerMissileNeedlerTextField)
+end DamagePerMissileNeedlerEntered
+
+procedure DamagePerMissileBeamEntered (text : string)
+    GUI.SetSelection (DamagePerMissileBeamTextField, 0, 0)
+    GUI.SetActive (DamagePerMissileBeamTextField)
+end DamagePerMissileBeamEntered
+
+procedure ImpactMissileAccelEntered (text : string)
+    if strrealok(GUI.GetText (ImpactMissileAccelTextField)) and strreal(GUI.GetText (ImpactMissileAccelTextField)) >= 0 and strreal(GUI.GetText (ImpactMissileAccelTextField)) <= 2 then
+        SWConf.ImpactMissileAccel := strreal(GUI.GetText (ImpactMissileAccelTextField))
+    else
+        GUI.SetText(ImpactMissileAccelTextField, realstr(SWConf.ImpactMissileAccel,0))
+    end if
+    GUI.SetActive (ImpactMissileAccelTextField)
+end ImpactMissileAccelEntered
+
+procedure BlastMissileAccelEntered (text : string)
+    GUI.SetSelection (BlastMissileAccelTextField, 0, 0)
+    GUI.SetActive (BlastMissileAccelTextField)
+end BlastMissileAccelEntered
+
+procedure NeedlerMissileAccelEntered (text : string)
+    GUI.SetSelection (NeedlerMissileAccelTextField, 0, 0)
+    GUI.SetActive (NeedlerMissileAccelTextField)
+end NeedlerMissileAccelEntered
+
+procedure BeamMissileAccelEntered (text : string)
+    GUI.SetSelection (BeamMissileAccelTextField, 0, 0)
+    GUI.SetActive (BeamMissileAccelTextField)
+end BeamMissileAccelEntered
+
+procedure PointsToWinEntered (text : string)
+    GUI.SetSelection (PointsToWinTextField, 0, 0)
+    GUI.SetActive (PointsToWinTextField)
+end PointsToWinEntered
+
+procedure DeathsToLoseEntered (text : string)
+    GUI.SetSelection (DeathsToLoseTextField, 0, 0)
+    GUI.SetActive (DeathsToLoseTextField)
+end DeathsToLoseEntered
+
+procedure MissilesPerPackEntered (text : string)
+    GUI.SetSelection (MissilesPerPackTextField, 0, 0)
+    GUI.SetActive (MissilesPerPackTextField)
+end MissilesPerPackEntered
+
+procedure ItemPackDelayEntered (text : string)
+    GUI.SetSelection (ItemPackDelayTextField, 0, 0)
+    GUI.SetActive (ItemPackDelayTextField)
+end ItemPackDelayEntered
+
+procedure MissilePackRatioEntered (text : string)
+    GUI.SetSelection (MissilePackRatioTextField, 0, 0)
+    GUI.SetActive (MissilePackRatioTextField)
+end MissilePackRatioEntered
+
+procedure GravityEntered (text : string)
+    GUI.SetSelection (GravityTextField, 0, 0)
+    GUI.SetActive (GravityTextField)
+end GravityEntered
+
+procedure save_config
+    if strintok(GUI.GetText(PlayerHPTextField)) and strint(GUI.GetText(PlayerHPTextField))>=1 and strint(GUI.GetText(PlayerHPTextField))<=9999 then
+    hp:=1
+    end if
+    if strintok(GUI.GetText(PlayerAccelTextField)) and strint(GUI.GetText(PlayerAccelTextField))>=1 and strint(GUI.GetText(PlayerAccelTextField))<=800 then
+    bd:=1
+    end if
+    if strintok(GUI.GetText(Player1ColorTextField)) and strint(GUI.GetText(Player1ColorTextField))>=0 and strint(GUI.GetText(Player1ColorTextField))<=255 then
+    md:=1
+    end if
+    if strintok(GUI.GetText(Player2ColorTextField)) and strint(GUI.GetText(Player2ColorTextField))>=0 and strint(GUI.GetText(Player2ColorTextField))<=255 then
+    pa:=1
+    end if
+    if strintok(GUI.GetText(DamagePerBulletTextField)) and strint(GUI.GetText(DamagePerBulletTextField))>=1 and strint(GUI.GetText(DamagePerBulletTextField))<=9999 then
+    pv:=1
+    end if
+    if strintok(GUI.GetText(BulletFuelTextField)) and strint(GUI.GetText(BulletFuelTextField))>=30 and strint(GUI.GetText(BulletFuelTextField))<=900 then
+    ma:=1
+    end if
+    if strintok(GUI.GetText(DamagePerMiniBeamTextField)) and strint(GUI.GetText(DamagePerMiniBeamTextField))>=1 and strint(GUI.GetText(DamagePerMiniBeamTextField))<=9999 then
+    mv:=1
+    end if
+    if strintok(GUI.GetText(DamagePerLightBeamTextField)) and strint(GUI.GetText(DamagePerLightBeamTextField))>=1 and strint(GUI.GetText(DamagePerLightBeamTextField))<=9999 then
+    mf:=1
+    end if
+    if strintok(GUI.GetText(DamgePerHeavyBeamTextField)) and strint(GUI.GetText(DamgePerHeavyBeamTextField))>=1 and strint(GUI.GetText(DamgePerHeavyBeamTextField))<=9999 then
+    gs:=1
+    end if
+    if strintok(GUI.GetText(DamagePerMissileImpactTextField)) and strint(GUI.GetText(DamagePerMissileImpactTextField))>=1 and strint(GUI.GetText(DamagePerMissileImpactTextField))<=9999 then
+    hp:=1
+    end if
+    if strintok(GUI.GetText(DamagePerMissileBlastTextField)) and strint(GUI.GetText(DamagePerMissileBlastTextField))>=1 and strint(GUI.GetText(DamagePerMissileBlastTextField))<=9999 then
+    bd:=1
+    end if
+    if strintok(GUI.GetText(DamagePerMissileNeedlerTextField)) and strint(GUI.GetText(DamagePerMissileNeedlerTextField))>=1 and strint(GUI.GetText(DamagePerMissileNeedlerTextField))<=9999 then
+    md:=1
+    end if
+    if strintok(GUI.GetText(DamagePerMissileBeamTextField)) and strint(GUI.GetText(DamagePerMissileBeamTextField))>=1 and strint(GUI.GetText(DamagePerMissileBeamTextField))<=9999 then
+    pa:=1
+    end if
+    if strintok(GUI.GetText(ImpactMissileAccelTextField)) and strint(GUI.GetText(ImpactMissileAccelTextField))>=1 and strint(GUI.GetText(ImpactMissileAccelTextField))<=800 then
+    pv:=1
+    end if
+    if strintok(GUI.GetText(BlastMissileAccelTextField)) and strint(GUI.GetText(BlastMissileAccelTextField))>=1 and strint(GUI.GetText(BlastMissileAccelTextField))<=800 then
+    ma:=1
+    end if
+    if strintok(GUI.GetText(NeedlerMissileAccelTextField)) and strint(GUI.GetText(NeedlerMissileAccelTextField))>=1 and strint(GUI.GetText(NeedlerMissileAccelTextField))<=800 then
+    mv:=1
+    end if
+    if strintok(GUI.GetText(BeamMissileAccelTextField)) and strint(GUI.GetText(BeamMissileAccelTextField))>=1 and strint(GUI.GetText(BeamMissileAccelTextField))<=800 then
+    mf:=1
+    end if
+    if strintok(GUI.GetText(PointsToWinTextField)) and strint(GUI.GetText(PointsToWinTextField))>=1 and strint(GUI.GetText(PointsToWinTextField))<=1024 then
+    gs:=1
+    end if
+    if strintok(GUI.GetText(DeathsToLoseTextField)) and strint(GUI.GetText(DeathsToLoseTextField))>=1 and strint(GUI.GetText(DeathsToLoseTextField))<=1024 then
+    pv:=1
+    end if
+    if strintok(GUI.GetText(MissilesPerPackTextField)) and strint(GUI.GetText(MissilesPerPackTextField))>=1 and strint(GUI.GetText(MissilesPerPackTextField))<=1024 then
+    ma:=1
+    end if
+    if strintok(GUI.GetText(ItemPackDelayTextField)) and strint(GUI.GetText(ItemPackDelayTextField))>=30 and strint(GUI.GetText(ItemPackDelayTextField))<=18000 then
+    mv:=1
+    end if
+    if strintok(GUI.GetText(MissilePackRatioTextField)) and strint(GUI.GetText(MissilePackRatioTextField))>=0 and strint(GUI.GetText(MissilePackRatioTextField))<=255 then
+    mf:=1
+    end if
+    if strintok(GUI.GetText(GravityTextField)) and strint(GUI.GetText(GravityTextField))>=1 and strint(GUI.GetText(GravityTextField))<=1000 then
+    gs:=1
+    end if
+
+    if hp=1 and bd=1 and md=1 and pa=1 and pv=1 and ma=1 and mv =1 and mf=1 and gs=1 then
+     GUI.Quit
+    end if
+end save_config
+
+procedure default_config
+hp:=2
+bd:=2
+md:=2
+pa:=2
+pv:=2
+ma:=2
+mv:=2
+mf:=2
+gs:=2
+
+if hp=2 and bd=2 and md=2 and pa=2 and pv=2 and ma=2 and mv =2 and mf=2 and gs=2 then
+     GUI.Quit
+end if
+
+end default_config
+
+
+%main program
+Font.Draw ("CONFIGURATION", 230, 685, font3, white)
+
+%left column
+PlayerHPTextField := GUI.CreateTextFieldFull (200, 645, 90, "", PlayerHPEntered, GUI.INDENT, 0, 0)
+PlayerAccelTextField := GUI.CreateTextFieldFull (200, 595, 90, "", PlayerAccelEntered, GUI.INDENT, 0, 0)
+Player1ColorTextField := GUI.CreateTextFieldFull (200, 545, 90, "", Player1ColorEntered, GUI.INDENT, 0, 0)
+Player2ColorTextField := GUI.CreateTextFieldFull (200, 495, 90, "", Player2ColorEntered, GUI.INDENT, 0, 0)
+DamagePerBulletTextField := GUI.CreateTextFieldFull (200, 445, 90, "", DamagePerBulletEntered, GUI.INDENT, 0, 0)
+DamagePerMiniBeamTextField := GUI.CreateTextFieldFull (200, 345, 90, "", DamagePerMiniBeamEntered, GUI.INDENT, 0, 0)
+DamagePerLightBeamTextField := GUI.CreateTextFieldFull (200, 295, 90, "", DamagePerLightBeamEntered, GUI.INDENT, 0, 0)
+DamgePerHeavyBeamTextField := GUI.CreateTextFieldFull (200, 245, 90, "", DamgePerHeavyBeamEntered, GUI.INDENT, 0, 0)
+DamagePerMissileImpactTextField := GUI.CreateTextFieldFull (200, 195, 90, "", DamagePerMissileImpactEntered, GUI.INDENT, 0, 0)
+DamagePerMissileBlastTextField := GUI.CreateTextFieldFull (200, 145, 90, "", DamagePerMissileBlastEntered, GUI.INDENT, 0, 0)
+if y = 655 then
+    for counter : 1 .. 11
+    Text.ColorBack (7)
+    Text.Color (0)
+    Font.Draw (options (counter), 20, y, font1, white)
+    Font.Draw (default_settings (counter), 20, y - 15, font2, white)
+    Font.Draw (options (counter+11), 340, y, font1, white)
+    Font.Draw (default_settings (counter+11), 340, y - 15, font2, white)
+    y := y - 50
+    end for
+end if
+
+%right column
+ConfigMenuWidgetsAccel(1) := GUI.CreateTextFieldFull (520, 645, 90, "", DamagePerMissileNeedlerEntered, GUI.INDENT, 0, 0)
+ConfigMenuWidgetsAccel(1) := GUI.CreateTextFieldFull (520, 545, 90, "", ImpactMissileAccelEntered, GUI.INDENT, 0, 0)
+ConfigMenuWidgetsAccel(1) := GUI.CreateTextFieldFull (520, 495, 90, "", BlastMissileAccelEntered, GUI.INDENT, 0, 0)
+NeedlerMissileAccelTextField := GUI.CreateTextFieldFull (520, 445, 90, "", NeedlerMissileAccelEntered, GUI.INDENT, 0, 0)
+BeamMissileAccelTextField := GUI.CreateTextFieldFull (520, 395, 90, "", BeamMissileAccelEntered, GUI.INDENT, 0, 0)
+PointsToWinTextField := GUI.CreateTextFieldFull (520, 345, 90, "", PointsToWinEntered, GUI.INDENT, 0, 0)
+DeathsToLoseTextField := GUI.CreateTextFieldFull (520, 295, 90, "", DeathsToLoseEntered, GUI.INDENT, 0, 0)
+MissilesPerPackTextField := GUI.CreateTextFieldFull (520, 245, 90, "", MissilesPerPackEntered, GUI.INDENT, 0, 0)
+
+%Gravity column
+GravityTextField := GUI.CreateTextFieldFull (330, 100, 90, "", GravityEntered, GUI.INDENT, 0, 0)
+Font.Draw (options (23), 250, 105, font1, white)
+Font.Draw (default_settings (23), 250, 95, font2, white)
+
+%if strintok(GUI.GetText(hpTextField)) then
+var saveButton := GUI.CreateButton (240,50 , 5, "Save", save_config)
+var defaultButton := GUI.CreateButton (360,50 , 5, "Default", default_config)
+%end if
+
+loop
+    exit when GUI.ProcessEvent
+end loop
+
+%save variables
+%SWConf.PlayerHP:=strint(GUI.GetText(PlayerHPTextField))
+%SWConf.PlayerAccel:=strint(GUI.GetText(PlayerAccelTextField))
+%SWConf.Player1Color:=strint(GUI.GetText(Player1ColorTextField))
+%SWConf.Player2Color:=strint(GUI.GetText(Player2ColorTextField))
+%SWConf.DamagePerBullet:=strint(GUI.GetText(DamagePerBulletTextField))
+%SWConf.DamagePerMiniBeam:=strint(GUI.GetText(DamagePerMiniBeamTextField))
+%SWConf.DamagePerLightBeam:=strint(GUI.GetText(DamagePerLightBeamTextField))
+%SWConf.DamagePerHeavyBeam:=strint(GUI.GetText(DamagePerHeavyBeamTextField))
+%SWConf.DamagePerMissileImpact:=strint(GUI.GetText(DamagePerMissileImpactTextField))
+%SWConf.DamagePerMissileBlast:=strint(GUI.GetText(DamagePerMissileBlastTextField))
+%SWConf.DamagePerMissileNeedler:=strint(GUI.GetText(DamagePerMissileNeedlerTextField))
+%SWConf.DamagePerMissileBeam:=strint(GUI.GetText(DamagePerMissileBeamTextField))
+%SWConf.ImpactMissileAccel:=strint(GUI.GetText(ImpactMissileAccelTextField))
+%SWConf.BlastMissileAccel:=strint(GUI.GetText(BlastMissileAccelTextField))
+%SWConf.NeedlerMissileAccel:=strint(GUI.GetText(NeedlerMissileAccelTextField))
+%SWConf.BeamMissileAccel:=strint(GUI.GetText(BeamMissileAccelTextField))
+%SWConf.PointsToWin:=strint(GUI.GetText(PointsToWinTextField))
+%SWConf.DeathsToLose:=strint(GUI.GetText(DeathsToLoseTextField))
+%SWConf.MissilesPerPack:=strint(GUI.GetText(MissilesPerPackTextField))
+%SWConf.Gravity:=strint(GUI.GetText(GravityTextField))
+
+
+
+
+if hp=1 then
+cls
+put "Configuration saved!"
+elsif hp=2 then
+cls
+put "Default Configuration!"
+end if

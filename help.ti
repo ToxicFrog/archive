@@ -1,0 +1,129 @@
+import GUI in "%oot/lib/GUI"
+Window.SetActive(Window.Open("graphics:780;740,offscreenonly"))
+var HelpMenuWidgets:array 1..6 of int
+var x,y,diskfile:int
+var font1:int:=Font.New("impact:50")
+var font2:int:=Font.New("impact:20")
+var text:string
+var HelpBG:int:=Pic.FileNew("images/Help.bmp")
+x:=55
+y:=maxy-64
+var row : int := 6
+%put maxrow,maxcol
+%return
+proc HelpWeapons
+    cls
+    open: diskfile,"man/weapons.man",get
+    assert diskfile>0
+    locate(20,15)
+    loop
+    exit when eof(diskfile)
+    get: diskfile,text:*
+    Text.Locate(row,4)
+    put text," " ..
+    row += 1
+    end loop
+    row := 6
+    close:diskfile
+    Pic.Draw(HelpBG,0,0,1)
+    GUI.Refresh
+    View.Update
+end HelpWeapons
+
+proc HelpMissiles
+    cls
+    open: diskfile,"man/missiles.man",get
+    assert diskfile>0
+    locate(20,15)
+    loop
+    exit when eof(diskfile)
+    get: diskfile,text:*
+    Text.Locate(row,4)
+    put text," " ..
+    row += 1
+    end loop
+    row := 6
+    close:diskfile
+    Pic.Draw(HelpBG,0,0,1)
+    GUI.Refresh
+    View.Update
+end HelpMissiles
+
+proc HelpTerms
+    cls
+    open: diskfile,"man/terms.man",get
+    assert diskfile>0
+    locate(20,15)
+    loop
+    exit when eof(diskfile)
+    get: diskfile,text:*
+    Text.Locate(row,4)
+    put text," " ..
+    row += 1
+    end loop
+    row := 6
+    close:diskfile
+    Pic.Draw(HelpBG,0,0,1)
+    GUI.Refresh
+    View.Update
+end HelpTerms
+
+proc HelpGameplay
+    cls
+    open: diskfile,"man/game.man",get
+    assert diskfile>0
+    locate(20,15)
+    loop
+    exit when eof(diskfile)
+    get: diskfile,text:*
+    Text.Locate(row,4)
+    put text," " ..
+    row += 1
+    end loop
+    row := 6
+    close:diskfile
+    Pic.Draw(HelpBG,0,0,1)
+    GUI.Refresh
+    View.Update
+end HelpGameplay
+
+proc HelpConfig
+    cls
+    open: diskfile,"man/config.man",get
+    assert diskfile>0
+    locate(20,15)
+    loop
+    exit when eof(diskfile)
+    get: diskfile,text:*
+    Text.Locate(row,4)
+    put text," " ..
+    row += 1
+    end loop
+    row := 6
+    close:diskfile
+    Pic.Draw(HelpBG,0,0,1)
+    GUI.Refresh
+    View.Update
+end HelpConfig
+
+Text.ColorBack(0)
+Text.Color(7)
+%Font.Draw("HELP",30,maxy-30,font1,grey)
+%Font.Draw("HELP",32,maxy-32,font1,blue)
+HelpMenuWidgets(1):=GUI.CreateButton(x,y,85,"Weapons",HelpWeapons)
+HelpMenuWidgets(2):=GUI.CreateButton(x+100,y,85,"Missiles",HelpMissiles)
+HelpMenuWidgets(3):=GUI.CreateButton(x+200,y,85,"Terminology",HelpTerms)
+HelpMenuWidgets(4):=GUI.CreateButton(x+315,y,85,"Gameplay",HelpGameplay)
+HelpMenuWidgets(5):=GUI.CreateButton(x+415,y,85,"Configuration",HelpConfig)
+HelpMenuWidgets(6):=GUI.CreateButton(x+535,y,85,"Exit to MainMenu",GUI.Quit)
+for i : 1 .. 6
+    GUI.Show(HelpMenuWidegets(i))
+end for
+Pic.Draw(HelpBG,0,0,picCopy)
+GUI.Refresh
+View.Update
+
+loop
+    exit when GUI.ProcessEvent
+end loop
+GUI.CloseWindow(Window.GetActive())
