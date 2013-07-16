@@ -1,3 +1,4 @@
+%widgets to handle last-minute config: player colors and starting loadouts
 var NewGameWidgets : array 1 .. 12 of int
 procedure UpdatePlayer1ColorSlider(scolor:int)
     SWConf.Player1Color := scolor
@@ -31,15 +32,13 @@ procedure UpdateBrightLance(status:boolean)
 end UpdateBrightLance
 procedure UpdateInitImpactMissiles(nrof:int)
     SWConf.InitImpactMissiles := nrof
-    Draw.FillBox(GUI.GetX(NewGameWidgets(7)),GUI.GetY(NewGameWidgets(7)),780,GUI.GetY(NewGameWidgets(7))+GUI.GetHeight(NewGameWidgets(7)),0)
-    Pic.Draw(NewGameBG,0,0,3)
+    Draw.FillBox(663,215,692,229,7)
     Font.Draw(intstr(nrof),664,216,FontTitle,7)
-    GUI.Refresh
     View.Update
 end UpdateInitImpactMissiles
 procedure UpdateInitBlastMissiles(nrof:int)
     SWConf.InitBlastMissiles := nrof
-    Draw.FillBox(GUI.GetX(NewGameWidgets(8)),GUI.GetY(NewGameWidgets(8)),780,GUI.GetY(NewGameWidgets(8))+GUI.GetHeight(NewGameWidgets(8)),0)
+    Draw.FillBox(663,249,692,263,7)
     Pic.Draw(NewGameBG,0,0,3)
     Font.Draw(intstr(nrof),664,181,FontTitle,7)
     GUI.Refresh

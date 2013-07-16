@@ -1,3 +1,4 @@
+%trigonometric functions
 body function ComponentX(magnitude:real,theta:int):real
     result magnitude*cosd(theta mod 360)
 end ComponentX
@@ -9,24 +10,23 @@ body function TrueDist(x1,y1,x2,y2:real):real
 end TrueDist
 body function Theta(x1,y1,x2,y2:real):int
     if (y2=y1 and x1 < x2) or (x1=x2 and y1=y2) then % to the right
-	result 0
+        result 0
     elsif y2=y1 and x2 < x1 then % to the left
-	result 180
+        result 180
     elsif x1=x2 and y1>y2 then % below
-	result 270
+        result 270
     elsif x1=x2 and y2>y1 then % above
-	result 90
+        result 90
     elsif x2>x1 and y2>y1 then %A of CAST
-	result round(arctand((y2-y1)/(x2-x1)))
+        result round(arctand((y2-y1)/(x2-x1)))
     elsif x2>x1 and y1>y2 then %C of CAST
-	result 360+round(arctand((y2-y1)/(x2-x1)))
+        result 360+round(arctand((y2-y1)/(x2-x1)))
     elsif x1>x2 and y2>y1 then %S of CAST
-	result 180+round(arctand((y2-y1)/(x2-x1)))
+        result 180+round(arctand((y2-y1)/(x2-x1)))
     elsif x1>x2 and y1>y2 then %T of CAST
-	result 180+round(arctand((y2-y1)/(x2-x1)))
+        result 180+round(arctand((y2-y1)/(x2-x1)))
     end if
 end Theta
-
-%body function tand(theta : int) : real
-%    result ComponentY(1,theta)/ComponentX(1,theta)
-%end tand
+body function tand(theta : int) : real
+    result ComponentY(1,theta)/ComponentX(1,theta)
+end tand

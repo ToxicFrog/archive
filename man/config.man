@@ -1,0 +1,38 @@
+CONFIGURATION
+
+The configuration screen consists of 2 pages, accessed by pressing the "DAMAGE"
+or "SYSTEM" buttons at the top.
+
+DAMAGE
+
+This is fairly simple: drag the sliders to adjust the damage dealt. There are a
+few things to take note of, however:
+Bright Lance: 	This is damage per tick. A bright lance beam lasts for 9 ticks
+	(just under 1/3 of 	a second), so multiply the damage by 9 to work
+	out the actual amount of damage it deals. 	An enemy that attempts
+	to dodge, however, may only recieve a glancing hit from the beam, only
+	taking 1-2 ticks worth of damage.
+TCPW:		The damage setting also determines the blast radius. Higher
+	damage=larger blast.
+
+
+SYSTEM
+
+Gravity:	This determines the strength of the gravity that the sun exerts.
+	Higher values will pull players into the sun faster.
+Inverse Gravity:This tickbox (near the bottom) reverses the direction of gravity:
+	players will be pushed away from the sun instead of falling towards it.
+Player HP:	The amount of health each player has. Higher values make them
+	harder to destroy. Each weapon hit reduces the player's HP by an amount
+	equal to the weapon's DAMAGE setting (see above).
+Kills to Win:	Once a player scores this number of kills, they win the game.
+Deaths to Lose: Once a player dies this many times, the other player wins.
+All of the other sliders are used to adjust acceleration amounts in px/t (see
+TERMINOLOGY). Higher values result in faster missiles and players.
+
+NEW GAME
+
+This lets you make final setup changes before the game starts. The two sliders
+at the top determine what color each player is. The four tickboxes determines
+what guns the players start with, and the four sliders at the bottom determine
+how many missiles of each type the players start with.

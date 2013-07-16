@@ -1,3 +1,5 @@
+%stats for gun - entity name, rate-of-fire, how wide apart the guns are set, muzzle velocity, dependency on the ship's V, and cooldown time
+%note that v of 0 and dependency of 2 causes the shots to emerge at 0+2*shipvelocity!
 var *Primaries : array 1 .. 4 of Weapon
 Primaries(1).Name :=        "bullet"
 Primaries(1).ROF :=         1

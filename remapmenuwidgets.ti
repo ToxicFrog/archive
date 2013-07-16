@@ -111,7 +111,7 @@ procedure Remap2Up()
     Cpause
     SWConf.Key2Up := getchar
     GUI.Dispose(RemapWidgets(8))
-    RemapWidgets(8) := GUI.CreateButton(508,550,64,SWConf.Key1Up,Remap1Up)
+    RemapWidgets(8) := GUI.CreateButton(508,550,64,SWConf.Key2Up,Remap2Up)
     GUI.Show(RemapWidgets(8))
     UnockAllRemapWidgets
     GUI.Refresh

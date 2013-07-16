@@ -1,3 +1,41 @@
-The game itself starts with two ships randomly located on the starfield with a sun in the center (Warning: allowing your ship to drift into the sun will result in destroying your ship). To move both ships the Thrust Button* will power your ships and will accelerate them in the direction that the ships are pointing.  Using the Rotate Buttons* will rotate your ship either left or right, and together with thrust will manoeuver your ship where you desire to go. Now this game is about destroying your opponent so of course there's weapons. Basically there are two types of weapons, high velocity projectiles and  missiles. High velocity projectile weapons are any weapon that is not homing, while missile type weapons are. To use the High velocity projectile weapons just aim towards your target and press the Fire Primary Button* or if you want to use a missile type weapon press the Fire Secondary Button* and you can see the missile type weapon  manoeuver toward your target. Throughout the game there are multiple types of missile weapons and high velocity weapons. You can toggle through the different types by pressing the Change Primary Button* for the high velocity weapons and Change Secondary Button* for the missile type weapons. Or you can find all this out by just playing around . Either way Have Fun!!! 
+GAMEPLAY
+
+THE STATUS BAR
+Along the left side of the screen is the status bar. This indicates the status of
+each ship. The top contains two images indicating what gun and missile player 1
+has selected. The number immediately below this indicates how many missiles of
+that type player 1 has remaining. The next two numbers are the number of kills
+player 1 has made, and the number of times player 1 has died. Falling into the sun
+reduces your kills score by 1, so it is possible to have a negative number of kills.
+Finally, there is a block of color acting as a visual representation of the amount
+of health player 1 has, with a numerical indicator below that. The indicators for
+player 2 occupy the lower half, but in reverse: The health indicator is at the top,
+the weapon indicators at the bottom, etc.
+
+THE GAME
+The game itself starts with two ships randomly located on the starfield with a
+sun in the center (Warning: allowing your ship to drift into the sun will result
+in destroying your ship). To move both ships the Thrust Button* will power your
+ships and will accelerate them in the direction that the ships are pointing.
+Using the Rotate Buttons will rotate your ship either left or right, and
+together with thrust will manoeuver your ship where you desire to go. Now this
+game is about destroying your opponent so of course there's weapons. Basically
+there are two types of weapons, (primary) guns and (secondary) missiles. Guns are
+powerred by your ship's reactor and thus never run out of ammo. Missiles are
+somewhat more complex and have limited ammo, but will home in on your victim
+until they run out of fuel. There are four types of guns and four types of
+missiles -- more information can be found on the relevant help pages. To cycle
+through your guns press "Next Gun", and press "Next Missile" to cycle your
+missiles. Note that you cannot select guns that you do not have or missiles that
+have run out of ammo. Also note that your currently selected gun/missile will
+not switch under any circumstances except when you tell it to -- it will not
+autoswitch if you run out of ammo, die, or pick up a better weapon. New guns and
+missiles can be collected in the game from the wreckage of ships -- they will
+appear as oval packages, with the colour indicating what they contain. White,
+green, blue, and dark blue packages contain guns, while orange, grey, sky blue,
+and purple packages contain missiles. Red packages will partially repair your
+ship. When your ship is destroyed, any missiles or guns you have collected will
+be lost, and you will reappear with the default loadout. 
 		 
-* You can find these controls in the REMAP CONTROLS option or you can change these controls to whatever suits you
+* You can find these controls in the REMAP CONTROLS screen, whch will also allow
+you to change them to whatever you want.

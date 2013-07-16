@@ -1,3 +1,4 @@
+%Object prototype class (yes, it deserves its own file
 class Object
     export Create,Update,x,y,dx,dy
     deferred procedure Create(ix,iy,idx,idy:real)

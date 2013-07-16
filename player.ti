@@ -1,3 +1,4 @@
+%the almighty Player class -- most complex of the Object subclasses
 class Player
     inherit Object
     import Input
@@ -12,6 +13,7 @@ class Player
     var PID : int := 1
     var cooldown : int := 0
     var deathcounter : int := 0
+    %need to determine what player this is
     body procedure Create(ix,iy,idx,idy:real)
         x := ix
         y := iy
@@ -39,7 +41,9 @@ class Player
     end Create
     body procedure Update()
         cooldown := max(0,cooldown-1)
-	Input.KeyDown(input)
+        Input.KeyDown(input)
+        %rather proud of this - cast the bool to an int and multiply by the rotation amt
+        %rotate 5*0 deg if it isn't pressed, and 5*1 deg if it is
         theta += 5*cheat(int1,input(KeyLf))
         theta -= 5*cheat(int1,input(KeyRt))
         dx += ComponentX(SWConf.PlayerAccel,theta)*cheat(int1,input(KeyFwd))
@@ -50,9 +54,11 @@ class Player
         y += dy
         x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
         y := y mod SCREEN_Y
+        %cast int to bool this time -- see if the ship is dying
         if cheat(boolean,deathcounter) then
             deathcounter -= 1
             BlowItUp(round(x),round(y),2,8,8,16,39,42,1,SHIP_SIZE,SHIP_SIZE)
+            %when the ship finishes burning, reinitialize
             if ~cheat(boolean,deathcounter) then
                 BlowItUp(round(x),round(y),2,16,16,32,39,44,24,20,20)
                 AddObject("box"+intstr(Rand.Int(0,9)),x,y,dx,dy)
@@ -73,11 +79,11 @@ class Player
                 Players(PID).ammo(2) := SWConf.InitBlastMissiles
                 Players(PID).ammo(3) := SWConf.InitNeedlers
                 Players(PID).ammo(4) := SWConf.InitBeamMissiles
-                
             end if
             current := current->next
             return
         end if
+        %are we dead?
         if abs(TrueDist(x,y,SUN_X,SUN_Y)) < 32 then
             BlowItUp(round(x),round(y),2,16,16,32,39,44,24,20,20)
             Players(PID).kills -= 1
@@ -92,9 +98,11 @@ class Player
             Players(PID).deaths += 1
             return
         end if
+        %engine flames!
         if input(KeyFwd) then
             AddObject("explsion", Rand.Int(round(x)-4,round(x)+4)+round(ComponentX(6,theta+180 mod 360)), Rand.Int(round(y)-4,round(y)+4)+round(ComponentY(6,theta+180 mod 360)), 8.39,9.43)
         end if
+        %only allow the player to fire if the gun won't overheat!
         if cooldown = 0 then
             if input(KeyFir) and Players(PID).weapons(Players(PID).weapon) then
                 for i : 1 .. Primaries(Players(PID).weapon).ROF
@@ -128,9 +136,9 @@ class Player
                     exit when Players(PID).ammo(Players(PID).altweapon) > 0
                 end for
                 cooldown := 30
-            end if
-            
+            end if   
         end if
+        %draw the player
         if PID = 1 then
             DrawPlayer(x,y,theta,SWConf.Player1Color,round((Players(1).HP/SWConf.PlayerHP)*16)+15)
         else
@@ -139,4 +147,3 @@ class Player
         current := current->next
     end Update
 end Player
-

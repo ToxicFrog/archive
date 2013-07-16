@@ -1,3 +1,4 @@
+%version 1.02
 import GUI in "%oot/lib/GUI"
 
 %Object class proto
@@ -186,7 +187,7 @@ body procedure ChangeConfig()
     end for
     Pic.Draw(ConfigBG,0,0,0)
     ShowOtherConfig
-    GUI.Refresh
+    %GUI.Refresh
     View.Update
     loop
         exit when GUI.ProcessEvent or ExitCall

@@ -1,0 +1,51 @@
+%default configuration for spacewar
+SWConf.PlayerHP := 100
+SWConf.Player1Color := 9
+SWConf.Player2Color := 10
+SWConf.PlayerAccel := 0.256
+
+SWConf.Gravity := 8
+SWConf.KillsToWin := 15
+SWConf.DeathsToLose := 15
+SWConf.MissilesPerPack := 5
+
+SWConf.DamagePerBullet := 5
+SWConf.DamagePerMiniBeam := 1
+SWConf.DamagePerLightBeam := 4
+SWConf.DamagePerHeavyBeam := 8
+SWConf.DamagePerMissileImpact := 20
+SWConf.DamagePerMissileBlast := 100
+SWConf.DamagePerMissileNeedler := 2
+
+SWConf.MiniBeamRange := 60
+SWConf.LightBeamRange := 120
+SWConf.HeavyBeamRange := 340
+SWConf.MissileImpactAccel := 0.1
+SWConf.MissileBlastAccel := 0.3
+SWConf.MissileNeedlerAccel := 0.4
+SWConf.MissileBeamAccel := 0.2
+
+SWConf.InitMassDriver := true
+SWConf.InitWMassDriver := false
+SWConf.InitXRL :=false
+SWConf.InitBrightLance := false
+SWConf.InitImpactMissiles := 5
+SWConf.InitBlastMissiles := 0
+SWConf.InitNeedlers := 0
+SWConf.InitBeamMissiles := 0
+
+SWConf.Key1Up := 'w'
+SWConf.Key1Lf := 'a'
+SWConf.Key1Rt := 'd'
+SWConf.Key1Gun := 's'
+SWConf.Key1Msl := 'x'
+SWConf.Key1NextGun := 'z'
+SWConf.Key1NextMsl := 'c'
+
+SWConf.Key2Up := '8'
+SWConf.Key2Lf := '4'
+SWConf.Key2Rt := '6'
+SWConf.Key2Gun := '5'
+SWConf.Key2Msl := '2'
+SWConf.Key2NextGun := '1'
+SWConf.Key2NextMsl := '3'

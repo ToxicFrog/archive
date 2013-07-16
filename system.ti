@@ -1,4 +1,5 @@
-
+%the Object:ViewUpdater, used to render the screen and display status bar/background
+%Object:Explosion goes here cause I don't know where else to put it (it can't go in effects.ti because of dependency issues)
 class ViewUpdater
     inherit Object
     var FrameTime :int := 0

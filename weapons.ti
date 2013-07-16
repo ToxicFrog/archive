@@ -1,4 +1,6 @@
-
+%classes for the Bullet and Beam weapon types
+%beams are hitscan, and trace path before they fire
+%this means a ship moving away from them will cause the beams to glance off the shields - a head-on attack is much more powerful
 class Bullet
                 inherit Object
                 var fuel := 100

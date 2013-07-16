@@ -1,30 +1,31 @@
+%sfx - explosions and beams. DrawPlayer is here cause it can't go anywhere else
 body procedure BlowItUp(x,y,rnn,rnm,rmn,rmm,clrmin,clrmax,nrof,radiusX,radiusY:int) %x,y,start radius min,max,max radius min,max,color min,max,numberof,blast radius
-    for i : 1 .. nrof
-	AddObject("explsion",x+ComponentX(Rand.Int(0,radiusX),Rand.Int(0,360)),y+ComponentY(Rand.Int(0,radiusY),Rand.Int(0,360)),Rand.Int(rnn,rnm)+clrmin/100, Rand.Int(rmn,rmm)+clrmax/100)
-    end for
+                                for i : 1 .. nrof
+                                                                AddObject("explsion",x+ComponentX(Rand.Int(0,radiusX),Rand.Int(0,360)),y+ComponentY(Rand.Int(0,radiusY),Rand.Int(0,360)),Rand.Int(rnn,rnm)+clrmin/100, Rand.Int(rmn,rmm)+clrmax/100)
+                                end for
 end BlowItUp
 body procedure Beam(x1,y1,x2,y2:real,clrmin,clrmax,width:int)
-	var theta : int := Theta(x1,y1,x2,y2)
-	var len : real := TrueDist(x1,y1,x2,y2)
-	for i : 0 .. width
-		Draw.Line(round(x1+ComponentX(i,(theta+90) mod 360)),round(y1+ComponentY(i,(theta+90) mod 360)),round(x1+ComponentX(i,(theta+90) mod 360)+ComponentX(len,theta mod 360)),round(y1+ComponentY(i,(theta+90) mod 360)+ComponentY(len,theta mod 360)),Rand.Int(clrmin,clrmax))
-		Draw.Line(round(x1+ComponentX(i,(theta-90) mod 360)),round(y1+ComponentY(i,(theta-90) mod 360)),round(x1+ComponentX(i,(theta-90) mod 360)+ComponentX(len,theta mod 360)),round(y1+ComponentY(i,(theta-90) mod 360)+ComponentY(len,theta mod 360)),Rand.Int(clrmin,clrmax))
-	end for
+        var theta : int := Theta(x1,y1,x2,y2)
+        var len : real := TrueDist(x1,y1,x2,y2)
+        for i : 0 .. width
+                Draw.Line(round(x1+ComponentX(i,(theta+90) mod 360)),round(y1+ComponentY(i,(theta+90) mod 360)),round(x1+ComponentX(i,(theta+90) mod 360)+ComponentX(len,theta mod 360)),round(y1+ComponentY(i,(theta+90) mod 360)+ComponentY(len,theta mod 360)),Rand.Int(clrmin,clrmax))
+                Draw.Line(round(x1+ComponentX(i,(theta-90) mod 360)),round(y1+ComponentY(i,(theta-90) mod 360)),round(x1+ComponentX(i,(theta-90) mod 360)+ComponentX(len,theta mod 360)),round(y1+ComponentY(i,(theta-90) mod 360)+ComponentY(len,theta mod 360)),Rand.Int(clrmin,clrmax))
+        end for
 end Beam
 body procedure DrawPlayer(x,y:real,theta,color,color2:int)
-	var coords : array 1..4,1..2 of int
-	coords(1,1) := round(x+ComponentX(16,theta)+ComponentX(4,theta+90))
-	coords(1,2) := round(y+ComponentY(16,theta)+ComponentY(4,theta+90))
-	coords(2,1) := round(x+ComponentX(16,theta)+ComponentX(4,theta-90))
-	coords(2,2) := round(y+ComponentY(16,theta)+ComponentY(4,theta-90))
-	coords(3,1) := round(x+ComponentX(16,theta+180)+ComponentX(4,theta+90))
-	coords(3,2) := round(y+ComponentY(16,theta+180)+ComponentY(4,theta+90))
-	coords(4,1) := round(x+ComponentX(16,theta+180)+ComponentX(4,theta-90))
-	coords(4,2) := round(y+ComponentY(16,theta+180)+ComponentY(4,theta-90))
-	Draw.Oval(round(x),round(y),SHIP_SIZE-1,SHIP_SIZE-1,color2)
-	Draw.FillArc(coords(1,1),coords(1,2),16,16,(theta+180-FLANGE_ANGLE) mod 360,(theta+180) mod 360, color)
-	Draw.FillArc(coords(2,1),coords(2,2),16,16,(theta+180) mod 360,(theta+180+FLANGE_ANGLE) mod 360, color)
-	Draw.FillArc(coords(3,1),coords(3,2),16,16,(theta) mod 360,(theta+FLANGE_ANGLE) mod 360, color)
-	Draw.FillArc(coords(4,1),coords(4,2),16,16,(theta-FLANGE_ANGLE) mod 360,(theta) mod 360, color)
-	Draw.FillOval(round(x+ComponentX(6,theta)),round(y+ComponentY(6,theta)),6,6,color)
+        var coords : array 1..4,1..2 of int
+        coords(1,1) := round(x+ComponentX(16,theta)+ComponentX(4,theta+90))
+        coords(1,2) := round(y+ComponentY(16,theta)+ComponentY(4,theta+90))
+        coords(2,1) := round(x+ComponentX(16,theta)+ComponentX(4,theta-90))
+        coords(2,2) := round(y+ComponentY(16,theta)+ComponentY(4,theta-90))
+        coords(3,1) := round(x+ComponentX(16,theta+180)+ComponentX(4,theta+90))
+        coords(3,2) := round(y+ComponentY(16,theta+180)+ComponentY(4,theta+90))
+        coords(4,1) := round(x+ComponentX(16,theta+180)+ComponentX(4,theta-90))
+        coords(4,2) := round(y+ComponentY(16,theta+180)+ComponentY(4,theta-90))
+        Draw.Oval(round(x),round(y),SHIP_SIZE-1,SHIP_SIZE-1,color2)
+        Draw.FillArc(coords(1,1),coords(1,2),16,16,(theta+180-FLANGE_ANGLE) mod 360,(theta+180) mod 360, color)
+        Draw.FillArc(coords(2,1),coords(2,2),16,16,(theta+180) mod 360,(theta+180+FLANGE_ANGLE) mod 360, color)
+        Draw.FillArc(coords(3,1),coords(3,2),16,16,(theta) mod 360,(theta+FLANGE_ANGLE) mod 360, color)
+        Draw.FillArc(coords(4,1),coords(4,2),16,16,(theta-FLANGE_ANGLE) mod 360,(theta) mod 360, color)
+        Draw.FillOval(round(x+ComponentX(6,theta)),round(y+ComponentY(6,theta)),6,6,color)
 end DrawPlayer

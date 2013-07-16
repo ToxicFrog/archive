@@ -1,3 +1,5 @@
+%the heart of the game - loops around The Ring, updating everything
+%also contains code for "player n is victorious"
 
 body procedure Main()
     ExitConditions := false
@@ -53,14 +55,16 @@ body procedure Main()
     if input(chr(27)) then
         return
     else
-        case Rand.Int(1,399) div 100 of
+        case Rand.Int(1,499) div 100 of
             label 0: Pic.Draw(MainMenuBG,0,0,0)
             label 1: Pic.Draw(ConfigBG,0,0,0)
             label 2: Pic.Draw(NewGameBG,0,0,0)
             label 3: Pic.Draw(HelpBG,0,0,0)
+            label 4: Pic.Draw(HelpBG,0,0,0)
+                     Pic.Draw(RemapBG,20,0,0)
         end case
     end if
-    View.Set("graphics:xor")
+    %View.Set("graphics:xor")
     if Players(1).kills >= SWConf.KillsToWin or Players(2).deaths >= SWConf.DeathsToLose then
         Font.Draw ("PLAYER 1 IS VICTORIOUS!", 42, 650, FontMain, white)
     else
@@ -72,16 +76,22 @@ body procedure Main()
         if input('l') and input('g') and input('s') then
             cls
             Pic.ScreenLoad("images/SHODAN.bmp",0,78,0)
+            Font.Draw ("Ben Kelly", 42, 690, FontTitle, white)
+            Font.Draw ("Game Engine; Integration", 300, 40, FontTitle, white)
             View.Update
             Music.PlayFile("wav/SHODAN.wav")
         elsif input('f') and input(chr(193)) then
             cls
             Pic.ScreenLoad("images/midgar.bmp",0,112,0)
+            Font.Draw ("Jamie Klapwyk", 42, 690, FontTitle, white)
+            Font.Draw ("CGI Stills; Documentation", 300, 40, FontTitle, white)
             View.Update
             Music.PlayFile("wav/fanfare.wav")
         elsif input('m') and input('t') and input('g') then
             cls
             Pic.ScreenLoad("images/tolarian_winds.bmp",0,56,0)
+            Font.Draw ("Dane Pedersen", 42, 690, FontTitle, white)
+            Font.Draw ("Shell; Configurator", 300, 40, FontTitle, white)
             View.Update
             Music.PlayFile("wav/burning.wav")
         end if

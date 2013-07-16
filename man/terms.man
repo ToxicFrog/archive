@@ -1,0 +1,10 @@
+TERMINOLOGY
+
+fps	Frames per Second. A measure of how fast and smooth the game runs. Each
+	frame (or "tick" when referring to physics) is 1/30th of a second when
+	the game is running properly.
+px/t	Pixels per Tick. A measure of velocity: how many pixels (dots on the
+	screen) are traveld in one "tick" (or frame) of game time. Usually, the
+	game ticks at 30fps, so a velocity of 10px/t becomes 300 px/second.
+px/t^2	Pixels per Tick Squared. A measure of acceleration: how much its
+	velocity (in px/t) increases with each tick of accelleration.

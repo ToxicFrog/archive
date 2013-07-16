@@ -1,3 +1,4 @@
+%operations performed on The Ring: adding and removing Objects
 body procedure rmObject(var victim : ^node)
                 free victim->data
                 free victim

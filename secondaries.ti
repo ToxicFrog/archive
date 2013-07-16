@@ -1,3 +1,4 @@
+%identical to Primaries, except that this carries stats for missiles
 var *Secondaries : array 1 .. 4 of Weapon
 Secondaries(1).Name :=        "mslimpct"
 Secondaries(1).ROF :=         1

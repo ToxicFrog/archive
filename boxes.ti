@@ -1,43 +1,46 @@
+%boxes.ti - contains definitions for all of the boxes that players can pick up
+%this file is about 280 lines longer than it should be, these should inherit from an Object:DriftingType (as should Bullet)
+%oh well, you live and learn - no performance loss, but it takes up more hdd space than it should
 class Box_Health
     inherit Object
     var fuel : int := 300
     body procedure Create(ix,iy,idx,idy:real)
-	x := ix
-	y := iy
-	dx := idx
-	dy := idy
+    x := ix
+    y := iy
+    dx := idx
+    dy := idy
     end Create
     body procedure Update()
     fuel -= 1
-	dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
-	dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
-	x += dx
-	y += dy
-	x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
-	y := y mod SCREEN_Y
-	if abs(TrueDist(x,y,knot->data->x,knot->data->y)) < SHIP_SIZE then
-	    Players(1).HP += (SWConf.PlayerHP-Players(1).HP) div 3
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-						return
-				elsif abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
-	    Players(2).HP += (SWConf.PlayerHP-Players(2).HP) div 3
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-						return
-				elsif abs(TrueDist(x,y,SUN_X,SUN_Y)) < 16 or fuel = 0 then
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-		return
-	    end if
-	Draw.FillOval(round(x),round(y),4,10,red)
-	current := current->next
+    dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+    dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+    x += dx
+    y += dy
+    x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
+    y := y mod SCREEN_Y
+    if abs(TrueDist(x,y,knot->data->x,knot->data->y)) < SHIP_SIZE then
+        Players(1).HP += (SWConf.PlayerHP-Players(1).HP) div 3
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+                        return
+                elsif abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
+        Players(2).HP += (SWConf.PlayerHP-Players(2).HP) div 3
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+                        return
+                elsif abs(TrueDist(x,y,SUN_X,SUN_Y)) < 16 or fuel = 0 then
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+        return
+        end if
+    Draw.FillOval(round(x),round(y),4,10,red)
+    current := current->next
     end Update
 end Box_Health
 
@@ -45,42 +48,42 @@ class Box_MassDriver
     inherit Object
     var fuel : int := 300
     body procedure Create(ix,iy,idx,idy:real)
-	x := ix
-	y := iy
-	dx := idx
-	dy := idy
+    x := ix
+    y := iy
+    dx := idx
+    dy := idy
     end Create
     body procedure Update()
-	fuel -= 1
-	dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
-	dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
-	x += dx
-	y += dy
-	x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
-	y := y mod SCREEN_Y
-	if abs(TrueDist(x,y,knot->data->x,knot->data->y)) < SHIP_SIZE then
-	    Players(1).weapons(1) := true
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-						return
-				elsif abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
-						Players(2).weapons(1) := true
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-						return
-				elsif abs(TrueDist(x,y,SUN_X,SUN_Y)) < 16 or fuel = 0 then
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-		return
-	    end if
-	Draw.FillOval(round(x),round(y),4,10,white)
-	current := current->next
+    fuel -= 1
+    dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+    dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+    x += dx
+    y += dy
+    x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
+    y := y mod SCREEN_Y
+    if abs(TrueDist(x,y,knot->data->x,knot->data->y)) < SHIP_SIZE then
+        Players(1).weapons(1) := true
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+                        return
+                elsif abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
+                        Players(2).weapons(1) := true
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+                        return
+                elsif abs(TrueDist(x,y,SUN_X,SUN_Y)) < 16 or fuel = 0 then
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+        return
+        end if
+    Draw.FillOval(round(x),round(y),4,10,white)
+    current := current->next
     end Update
 end Box_MassDriver
 
@@ -88,42 +91,42 @@ class Box_WMassDriver
     inherit Object
     var fuel : int := 300
     body procedure Create(ix,iy,idx,idy:real)
-	x := ix
-	y := iy
-	dx := idx
-	dy := idy
+    x := ix
+    y := iy
+    dx := idx
+    dy := idy
     end Create
     body procedure Update()
-	fuel -= 1
-	dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
-	dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
-	x += dx
-	y += dy
-	x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
-	y := y mod SCREEN_Y
-	if abs(TrueDist(x,y,knot->data->x,knot->data->y)) < SHIP_SIZE then
-	    Players(1).weapons(2) := true
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-						return
-				elsif abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
-						Players(2).weapons(2) := true
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-						return
-				elsif abs(TrueDist(x,y,SUN_X,SUN_Y)) < 16 or fuel = 0 then
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-		return
-	    end if
-	Draw.FillOval(round(x),round(y),4,10,brightgreen)
-	current := current->next
+    fuel -= 1
+    dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+    dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+    x += dx
+    y += dy
+    x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
+    y := y mod SCREEN_Y
+    if abs(TrueDist(x,y,knot->data->x,knot->data->y)) < SHIP_SIZE then
+        Players(1).weapons(2) := true
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+                        return
+                elsif abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
+                        Players(2).weapons(2) := true
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+                        return
+                elsif abs(TrueDist(x,y,SUN_X,SUN_Y)) < 16 or fuel = 0 then
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+        return
+        end if
+    Draw.FillOval(round(x),round(y),4,10,brightgreen)
+    current := current->next
     end Update
 end Box_WMassDriver
 
@@ -131,42 +134,42 @@ class Box_XRL
     inherit Object
     var fuel : int := 300
     body procedure Create(ix,iy,idx,idy:real)
-	x := ix
-	y := iy
-	dx := idx
-	dy := idy
+    x := ix
+    y := iy
+    dx := idx
+    dy := idy
     end Create
     body procedure Update()
-	fuel -= 1
-	dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
-	dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
-	x += dx
-	y += dy
-	x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
-	y := y mod SCREEN_Y
-	if abs(TrueDist(x,y,knot->data->x,knot->data->y)) < SHIP_SIZE then
-	    Players(1).weapons(3) := true
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-						return
-				elsif abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
-						Players(2).weapons(3) := true
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-						return
-				elsif abs(TrueDist(x,y,SUN_X,SUN_Y)) < 16 or fuel = 0 then
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-		return
-	    end if
-	Draw.FillOval(round(x),round(y),4,10,brightblue)
-	current := current->next
+    fuel -= 1
+    dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+    dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+    x += dx
+    y += dy
+    x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
+    y := y mod SCREEN_Y
+    if abs(TrueDist(x,y,knot->data->x,knot->data->y)) < SHIP_SIZE then
+        Players(1).weapons(3) := true
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+                        return
+                elsif abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
+                        Players(2).weapons(3) := true
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+                        return
+                elsif abs(TrueDist(x,y,SUN_X,SUN_Y)) < 16 or fuel = 0 then
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+        return
+        end if
+    Draw.FillOval(round(x),round(y),4,10,brightblue)
+    current := current->next
     end Update
 end Box_XRL
 
@@ -174,42 +177,42 @@ class Box_BrightLance
     inherit Object
     var fuel : int := 300
     body procedure Create(ix,iy,idx,idy:real)
-	x := ix
-	y := iy
-	dx := idx
-	dy := idy
+    x := ix
+    y := iy
+    dx := idx
+    dy := idy
     end Create
     body procedure Update()
-	fuel -= 1
-	dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
-	dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
-	x += dx
-	y += dy
-	x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
-	y := y mod SCREEN_Y
-	if abs(TrueDist(x,y,knot->data->x,knot->data->y)) < SHIP_SIZE then
-	    Players(1).weapons(4) := true
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-						return
-				elsif abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
-						Players(2).weapons(4) := true
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-						return
-				elsif abs(TrueDist(x,y,SUN_X,SUN_Y)) < 16 or fuel = 0 then
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-		return
-	    end if
-	Draw.FillOval(round(x),round(y),4,10,blue)
-	current := current->next
+    fuel -= 1
+    dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+    dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+    x += dx
+    y += dy
+    x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
+    y := y mod SCREEN_Y
+    if abs(TrueDist(x,y,knot->data->x,knot->data->y)) < SHIP_SIZE then
+        Players(1).weapons(4) := true
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+                        return
+                elsif abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
+                        Players(2).weapons(4) := true
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+                        return
+                elsif abs(TrueDist(x,y,SUN_X,SUN_Y)) < 16 or fuel = 0 then
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+        return
+        end if
+    Draw.FillOval(round(x),round(y),4,10,blue)
+    current := current->next
     end Update
 end Box_BrightLance
 
@@ -217,42 +220,42 @@ class Box_Impacter
     inherit Object
     var fuel : int := 300
     body procedure Create(ix,iy,idx,idy:real)
-	x := ix
-	y := iy
-	dx := idx
-	dy := idy
+    x := ix
+    y := iy
+    dx := idx
+    dy := idy
     end Create
     body procedure Update()
-	fuel -= 1
-	dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
-	dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
-	x += dx
-	y += dy
-	x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
-	y := y mod SCREEN_Y
-	if abs(TrueDist(x,y,knot->data->x,knot->data->y)) < SHIP_SIZE then
-	    Players(1).ammo(1) += SWConf.MissilesPerPack
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-						return
-				elsif abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
-	    Players(2).ammo(1) += SWConf.MissilesPerPack
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-						return
-				elsif abs(TrueDist(x,y,SUN_X,SUN_Y)) < 16 or fuel = 0 then
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-		return
-	    end if
-	Draw.FillOval(round(x),round(y),4,10,grey)
-	current := current->next
+    fuel -= 1
+    dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+    dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+    x += dx
+    y += dy
+    x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
+    y := y mod SCREEN_Y
+    if abs(TrueDist(x,y,knot->data->x,knot->data->y)) < SHIP_SIZE then
+        Players(1).ammo(1) += SWConf.MissilesPerPack
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+                        return
+                elsif abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
+        Players(2).ammo(1) += SWConf.MissilesPerPack
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+                        return
+                elsif abs(TrueDist(x,y,SUN_X,SUN_Y)) < 16 or fuel = 0 then
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+        return
+        end if
+    Draw.FillOval(round(x),round(y),4,10,grey)
+    current := current->next
     end Update
 end Box_Impacter
 
@@ -260,42 +263,42 @@ class Box_TCPW
     inherit Object
     var fuel : int := 300
     body procedure Create(ix,iy,idx,idy:real)
-	x := ix
-	y := iy
-	dx := idx
-	dy := idy
+    x := ix
+    y := iy
+    dx := idx
+    dy := idy
     end Create
     body procedure Update()
-	fuel -= 1
-	dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
-	dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
-	x += dx
-	y += dy
-	x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
-	y := y mod SCREEN_Y
-	if abs(TrueDist(x,y,knot->data->x,knot->data->y)) < SHIP_SIZE then
-	    Players(1).ammo(2) += SWConf.MissilesPerPack
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-						return
-				elsif abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
-	    Players(2).ammo(2) += SWConf.MissilesPerPack
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-						return
-				elsif abs(TrueDist(x,y,SUN_X,SUN_Y)) < 16 or fuel = 0 then
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-		return
-	    end if
-	Draw.FillOval(round(x),round(y),4,10,yellow)
-	current := current->next
+    fuel -= 1
+    dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+    dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+    x += dx
+    y += dy
+    x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
+    y := y mod SCREEN_Y
+    if abs(TrueDist(x,y,knot->data->x,knot->data->y)) < SHIP_SIZE then
+        Players(1).ammo(2) += SWConf.MissilesPerPack
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+                        return
+                elsif abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
+        Players(2).ammo(2) += SWConf.MissilesPerPack
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+                        return
+                elsif abs(TrueDist(x,y,SUN_X,SUN_Y)) < 16 or fuel = 0 then
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+        return
+        end if
+    Draw.FillOval(round(x),round(y),4,10,yellow)
+    current := current->next
     end Update
 end Box_TCPW
 
@@ -303,42 +306,42 @@ class Box_Needler
     inherit Object
     var fuel : int := 300
     body procedure Create(ix,iy,idx,idy:real)
-	x := ix
-	y := iy
-	dx := idx
-	dy := idy
+    x := ix
+    y := iy
+    dx := idx
+    dy := idy
     end Create
     body procedure Update()
-	fuel -= 1
-	dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
-	dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
-	x += dx
-	y += dy
-	x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
-	y := y mod SCREEN_Y
-	if abs(TrueDist(x,y,knot->data->x,knot->data->y)) < SHIP_SIZE then
-	    Players(1).ammo(3) += SWConf.MissilesPerPack*10
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-						return
-				elsif abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
-	    Players(2).ammo(3) += SWConf.MissilesPerPack*10
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-						return
-				elsif abs(TrueDist(x,y,SUN_X,SUN_Y)) < 16 or fuel = 0 then
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-		return
-	    end if
-	Draw.FillOval(round(x),round(y),4,10,purple)
-	current := current->next
+    fuel -= 1
+    dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+    dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+    x += dx
+    y += dy
+    x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
+    y := y mod SCREEN_Y
+    if abs(TrueDist(x,y,knot->data->x,knot->data->y)) < SHIP_SIZE then
+        Players(1).ammo(3) += SWConf.MissilesPerPack*10
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+                        return
+                elsif abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
+        Players(2).ammo(3) += SWConf.MissilesPerPack*10
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+                        return
+                elsif abs(TrueDist(x,y,SUN_X,SUN_Y)) < 16 or fuel = 0 then
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+        return
+        end if
+    Draw.FillOval(round(x),round(y),4,10,purple)
+    current := current->next
     end Update
 end Box_Needler
 
@@ -346,41 +349,41 @@ class Box_Beamer
     inherit Object
     var fuel : int := 300
     body procedure Create(ix,iy,idx,idy:real)
-	x := ix
-	y := iy
-	dx := idx
-	dy := idy
+    x := ix
+    y := iy
+    dx := idx
+    dy := idy
     end Create
     body procedure Update()
-	fuel -= 1
-	dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
-	dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
-	x += dx
-	y += dy
-	x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
-	y := y mod SCREEN_Y
-	if abs(TrueDist(x,y,knot->data->x,knot->data->y)) < SHIP_SIZE then
-	    Players(1).ammo(4) += SWConf.MissilesPerPack
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-						return
-				elsif abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
-	    Players(2).ammo(4) += SWConf.MissilesPerPack
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-						return
-				elsif abs(TrueDist(x,y,SUN_X,SUN_Y)) < 16 or fuel = 0 then
-						current := current->next
-						current->prev := current->prev->prev
-						rmObject(current->prev->next)
-						current->prev->next := current
-		return
-	    end if
-	Draw.FillOval(round(x),round(y),4,10,77)
-	current := current->next
+    fuel -= 1
+    dx += ((SUN_X-x)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+    dy += ((SUN_Y-y)/TrueDist(x,y,SUN_X,SUN_Y)**2)*SWConf.Gravity
+    x += dx
+    y += dy
+    x := (x-STATUS_BAR_SIZE) mod (SCREEN_X-STATUS_BAR_SIZE) + STATUS_BAR_SIZE
+    y := y mod SCREEN_Y
+    if abs(TrueDist(x,y,knot->data->x,knot->data->y)) < SHIP_SIZE then
+        Players(1).ammo(4) += SWConf.MissilesPerPack
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+                        return
+                elsif abs(TrueDist(x,y,knot->next->data->x,knot->next->data->y)) < SHIP_SIZE then
+        Players(2).ammo(4) += SWConf.MissilesPerPack
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+                        return
+                elsif abs(TrueDist(x,y,SUN_X,SUN_Y)) < 16 or fuel = 0 then
+                        current := current->next
+                        current->prev := current->prev->prev
+                        rmObject(current->prev->next)
+                        current->prev->next := current
+        return
+        end if
+    Draw.FillOval(round(x),round(y),4,10,77)
+    current := current->next
     end Update
 end Box_Beamer

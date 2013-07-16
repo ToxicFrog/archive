@@ -1,4 +1,5 @@
-
+%records
+%holds player stats that need to be public (and thus not part of Object:Player)
 type PlayerStats : record
         HP : int
         name : string(64)
@@ -10,12 +11,17 @@ type PlayerStats : record
         ammo : array 1 .. 4 of int
 end record
 
+%one node of the double-linked pointer ring that holds all Objects
 type *node : record
+        %pointer to next node
         next : ^node
+        %and to previous
         prev : ^node
+        %and to the Object that the node links to
         data : ^Object
 end record
 
+%weapon stats record
 type Weapon : record
     Name : string(8)
     ROF : int
@@ -26,6 +32,7 @@ type Weapon : record
     Image : int
 end record
 
+%the configuration - this one is huge, good thing it's only implemented once
 type Configuration : record
         PlayerHP : int
         PlayerAccel : real
@@ -65,18 +72,18 @@ type Configuration : record
         InitBeamMissiles : int
         
         Key1Up : char
-        Key1Lf : string(1)
-        Key1Rt : string(1)
-        Key1Gun : string(1)
-        Key1Msl : string(1)
-        Key1NextGun : string(1)
-        Key1NextMsl : string(1)
+        Key1Lf : char
+        Key1Rt : char
+        Key1Gun : char
+        Key1Msl : char
+        Key1NextGun : char
+        Key1NextMsl : char
         
-        Key2Up : string(1)
-        Key2Lf : string(1)
-        Key2Rt : string(1)
-        Key2Gun : string(1)
-        Key2Msl : string(1)
-        Key2NextGun : string(1)
-        Key2NextMsl : string(1)
+        Key2Up : char
+        Key2Lf : char
+        Key2Rt : char
+        Key2Gun : char
+        Key2Msl : char
+        Key2NextGun : char
+        Key2NextMsl : char
 end record

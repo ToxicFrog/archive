@@ -1,3 +1,4 @@
+%used to read pallette colour id's
 for i : 1 .. 255
 colorback(i)
 put "  "..

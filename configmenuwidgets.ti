@@ -6,145 +6,111 @@ var ConfigMenuSystemWidgets : array 1 .. 11 of int
 
 procedure UpdateBulletDamage(dmg : int)
     SWConf.DamagePerBullet := dmg
-    Draw.FillBox(GUI.GetX(ConfigMenuDamageWidgets(1)),GUI.GetY(ConfigMenuDamageWidgets(1)),780,GUI.GetY(ConfigMenuDamageWidgets(1))+GUI.GetHeight(ConfigMenuDamageWidgets(1)),0)
-    Pic.Draw(ConfigBG,0,0,3)
-    Font.Draw(intstr(dmg),664,500,FontTitle,7)
-    GUI.Refresh
+    Draw.FillBox(663,494,692,508,7)
+    Font.Draw(intstr(dmg),664,495,FontTitle,0)
     View.Update
 end UpdateBulletDamage
 procedure UpdateXRLDamage(dmg : int)
     SWConf.DamagePerLightBeam := dmg
-    Draw.FillBox(GUI.GetX(ConfigMenuDamageWidgets(2)),GUI.GetY(ConfigMenuDamageWidgets(2)),780,GUI.GetY(ConfigMenuDamageWidgets(2))+GUI.GetHeight(ConfigMenuDamageWidgets(2)),0)
-    Pic.Draw(ConfigBG,0,0,3)
-    Font.Draw(intstr(dmg),664,465,FontTitle,7)
-    GUI.Refresh
+    Draw.FillBox(663,459,692,473,7)
+    Font.Draw(intstr(dmg),664,460,FontTitle,0)
     View.Update
 end UpdateXRLDamage
 procedure UpdateBrightLanceDamage(dmg : int)
     SWConf.DamagePerHeavyBeam := dmg
-    Draw.FillBox(GUI.GetX(ConfigMenuDamageWidgets(3)),GUI.GetY(ConfigMenuDamageWidgets(3)),780,GUI.GetY(ConfigMenuDamageWidgets(3))+GUI.GetHeight(ConfigMenuDamageWidgets(3)),0)
-    Pic.Draw(ConfigBG,0,0,3)
-    Font.Draw(intstr(dmg),664,430,FontTitle,7)
-    GUI.Refresh
+    Draw.FillBox(663,424,692,438,7)
+    Font.Draw(intstr(dmg),664,425,FontTitle,0)
     View.Update
 end UpdateBrightLanceDamage
 procedure UpdateImpacterDamage(dmg : int)
     SWConf.DamagePerMissileImpact := dmg
-    Draw.FillBox(GUI.GetX(ConfigMenuDamageWidgets(4)),GUI.GetY(ConfigMenuDamageWidgets(4)),780,GUI.GetY(ConfigMenuDamageWidgets(4))+GUI.GetHeight(ConfigMenuDamageWidgets(4)),0)
-    Pic.Draw(ConfigBG,0,0,3)
-    Font.Draw(intstr(dmg),664,395,FontTitle,7)
-    GUI.Refresh
+    Draw.FillBox(663,389,692,403,7)
+    Font.Draw(intstr(dmg),664,390,FontTitle,0)
     View.Update
 end UpdateImpacterDamage
 procedure UpdateTCPWDamage(dmg : int)
     SWConf.DamagePerMissileBlast := dmg
-    Draw.FillBox(GUI.GetX(ConfigMenuDamageWidgets(5)),GUI.GetY(ConfigMenuDamageWidgets(5)),780,GUI.GetY(ConfigMenuDamageWidgets(5))+GUI.GetHeight(ConfigMenuDamageWidgets(5)),0)
-    Pic.Draw(ConfigBG,0,0,3)
-    Font.Draw(intstr(dmg),664,360,FontTitle,30)
-    GUI.Refresh
+    Draw.FillBox(663,354,692,368,7)
+    Font.Draw(intstr(dmg),664,355,FontTitle,0)
     View.Update
 end UpdateTCPWDamage
 procedure UpdateNeedlerDamage(dmg : int)
     SWConf.DamagePerMissileNeedler := dmg
-    Draw.FillBox(GUI.GetX(ConfigMenuDamageWidgets(6)),GUI.GetY(ConfigMenuDamageWidgets(6)),780,GUI.GetY(ConfigMenuDamageWidgets(6))+GUI.GetHeight(ConfigMenuDamageWidgets(6)),0)
-    Pic.Draw(ConfigBG,0,0,3)
-    Font.Draw(intstr(dmg),664,325,FontTitle,30)
-    GUI.Refresh
+    Draw.FillBox(663,319,692,333,7)
+    Font.Draw(intstr(dmg),664,320,FontTitle,30)
     View.Update
 end UpdateNeedlerDamage
 procedure UpdateBeamerDamage(dmg : int)
     SWConf.DamagePerMiniBeam := dmg
-    Draw.FillBox(GUI.GetX(ConfigMenuDamageWidgets(7)),GUI.GetY(ConfigMenuDamageWidgets(7)),780,GUI.GetY(ConfigMenuDamageWidgets(7))+GUI.GetHeight(ConfigMenuDamageWidgets(7)),0)
-    Pic.Draw(ConfigBG,0,0,3)
-    Font.Draw(intstr(dmg),664,290,FontTitle,30)
-    GUI.Refresh
+    Draw.FillBox(663,284,692,298,7)
+    Font.Draw(intstr(dmg),664,285,FontTitle,30)
     View.Update
 end UpdateBeamerDamage
 
 procedure UpdateGravity(amt : int)
     SWConf.Gravity := (amt/10)-(amt/5)*cheat(int,GUI.GetCheckBox(ConfigMenuSystemWidgets(11)))
-    Draw.FillBox(GUI.GetX(ConfigMenuSystemWidgets(1)),GUI.GetY(ConfigMenuSystemWidgets(1)),780,GUI.GetY(ConfigMenuSystemWidgets(1))+GUI.GetHeight(ConfigMenuSystemWidgets(1)),0)
-    Pic.Draw(ConfigBG,0,0,3)
-    Font.Draw(realstr(amt/10,0),664,495,FontTitle,7)
-    GUI.Refresh
+    Draw.FillBox(663,494,692,508,7)
+    Font.Draw(realstr(amt/10,0),664,495,FontTitle,0)
     View.Update
 end UpdateGravity
 procedure UpdatePlayerHP(amt : int)
     SWConf.PlayerHP := amt
-    Draw.FillBox(GUI.GetX(ConfigMenuSystemWidgets(2)),GUI.GetY(ConfigMenuSystemWidgets(2)),780,GUI.GetY(ConfigMenuSystemWidgets(2))+GUI.GetHeight(ConfigMenuSystemWidgets(2)),0)
-    Pic.Draw(ConfigBG,0,0,3)
-    Font.Draw(intstr(amt),664,460,FontTitle,7)
-    GUI.Refresh
+    Draw.FillBox(663,459,692,473,7)
+    Font.Draw(intstr(amt),664,460,FontTitle,0)
     View.Update
 end UpdatePlayerHP
 procedure UpdatePlayerAccel(amt : int)
     SWConf.PlayerAccel := amt/100
-    Draw.FillBox(GUI.GetX(ConfigMenuSystemWidgets(3)),GUI.GetY(ConfigMenuSystemWidgets(3)),780,GUI.GetY(ConfigMenuSystemWidgets(3))+GUI.GetHeight(ConfigMenuSystemWidgets(3)),0)
-    Pic.Draw(ConfigBG,0,0,3)
-    Font.Draw(realstr(amt/100,0),664,425,FontTitle,7)
-    GUI.Refresh
+    Draw.FillBox(663,424,692,438,7)
+    Font.Draw(realstr(amt/100,0),664,425,FontTitle,0)
     View.Update
 end UpdatePlayerAccel
 procedure UpdateImpacterAccel(amt : int)
     SWConf.MissileImpactAccel := amt/100
-    Draw.FillBox(GUI.GetX(ConfigMenuSystemWidgets(4)),GUI.GetY(ConfigMenuSystemWidgets(4)),780,GUI.GetY(ConfigMenuSystemWidgets(4))+GUI.GetHeight(ConfigMenuSystemWidgets(4)),0)
-    Pic.Draw(ConfigBG,0,0,3)
-    Font.Draw(realstr(amt/100,0),664,390,FontTitle,7)
-    GUI.Refresh
+    Draw.FillBox(663,389,692,403,7)
+    Font.Draw(realstr(amt/100,0),664,390,FontTitle,0)
     View.Update
 end UpdateImpacterAccel
 procedure UpdateTCPWAccel(amt : int)
     SWConf.MissileBlastAccel := amt/100
-    Draw.FillBox(GUI.GetX(ConfigMenuSystemWidgets(5)),GUI.GetY(ConfigMenuSystemWidgets(5)),780,GUI.GetY(ConfigMenuSystemWidgets(5))+GUI.GetHeight(ConfigMenuSystemWidgets(5)),0)
-    Pic.Draw(ConfigBG,0,0,3)
-    Font.Draw(realstr(amt/100,0),664,355,FontTitle,30)
-    GUI.Refresh
+    Draw.FillBox(663,354,692,368,7)
+    Font.Draw(realstr(amt/100,0),664,355,FontTitle,0)
     View.Update
 end UpdateTCPWAccel
 procedure UpdateNeedlerAccel(amt : int)
     SWConf.MissileNeedlerAccel := amt/100
-    Draw.FillBox(GUI.GetX(ConfigMenuSystemWidgets(6)),GUI.GetY(ConfigMenuSystemWidgets(6)),780,GUI.GetY(ConfigMenuSystemWidgets(6))+GUI.GetHeight(ConfigMenuSystemWidgets(6)),0)
-    Pic.Draw(ConfigBG,0,0,3)
-    Font.Draw(realstr(amt/100,0),664,320,FontTitle,30)
-    GUI.Refresh
+    Draw.FillBox(663,319,692,333,7)
+    Font.Draw(realstr(amt/100,0),664,320,FontTitle,0)
     View.Update
 end UpdateNeedlerAccel
 procedure UpdateBeamerAccel(amt : int)
     SWConf.MissileBeamAccel := amt/100
-    Draw.FillBox(GUI.GetX(ConfigMenuSystemWidgets(7)),GUI.GetY(ConfigMenuSystemWidgets(7)),780,GUI.GetY(ConfigMenuSystemWidgets(7))+GUI.GetHeight(ConfigMenuSystemWidgets(7)),0)
-    Pic.Draw(ConfigBG,0,0,3)
-    Font.Draw(realstr(amt/100,0),664,285,FontTitle,30)
-    GUI.Refresh
+    Draw.FillBox(663,284,692,298,7)
+    Font.Draw(realstr(amt/100,0),664,285,FontTitle,0)
     View.Update
 end UpdateBeamerAccel
-procedure UpdateInverseGravity(ng:boolean)
-    UpdateGravity(abs(round(SWConf.Gravity*10)))
-    View.Update
-end UpdateInverseGravity
 procedure UpdateKillsToWin(amt : int)
     SWConf.KillsToWin := amt
-    Draw.FillBox(GUI.GetX(ConfigMenuSystemWidgets(8)),GUI.GetY(ConfigMenuSystemWidgets(8)),780,GUI.GetY(ConfigMenuSystemWidgets(8))+GUI.GetHeight(ConfigMenuSystemWidgets(8)),0)
-    Pic.Draw(ConfigBG,0,0,3)
-    Font.Draw(intstr(amt),664,250,FontTitle,30)
-    GUI.Refresh
+    Draw.FillBox(663,249,692,263,7)
+    Font.Draw(intstr(amt),664,250,FontTitle,0)
     View.Update
 end UpdateKillsToWin
 procedure UpdateDeathsToLose(amt : int)
     SWConf.DeathsToLose := amt
-    Draw.FillBox(GUI.GetX(ConfigMenuSystemWidgets(9)),GUI.GetY(ConfigMenuSystemWidgets(9)),780,GUI.GetY(ConfigMenuSystemWidgets(9))+GUI.GetHeight(ConfigMenuSystemWidgets(9)),0)
-    Pic.Draw(ConfigBG,0,0,3)
-    Font.Draw(intstr(amt),664,215,FontTitle,30)
-    GUI.Refresh
+    Draw.FillBox(663,214,692,229,7)
+    Font.Draw(intstr(amt),664,215,FontTitle,0)
     View.Update
 end UpdateDeathsToLose
 procedure UpdateMissilesPerPack(amt : int)
     SWConf.MissilesPerPack := amt
-    Draw.FillBox(GUI.GetX(ConfigMenuSystemWidgets(10)),GUI.GetY(ConfigMenuSystemWidgets(10)),780,GUI.GetY(ConfigMenuSystemWidgets(10))+GUI.GetHeight(ConfigMenuSystemWidgets(10)),0)
-    Pic.Draw(ConfigBG,0,0,3)
-    Font.Draw(intstr(amt),664,180,FontTitle,30)
-    GUI.Refresh
+    Draw.FillBox(663,179,692,194,7)
+    Font.Draw(intstr(amt),664,180,FontTitle,0)
     View.Update
 end UpdateMissilesPerPack
+procedure UpdateInverseGravity(ng:boolean)
+    UpdateGravity(abs(round(SWConf.Gravity*10)))
+    View.Update
+end UpdateInverseGravity
 
 procedure ShowDamageConfig
     for i : 1..11

@@ -1,3 +1,5 @@
+%helpmenuwidgets -- widgets & helploaders.
+
 var HelpMenuWidgets:array 1..6 of int
 
 proc HelpWeapons
@@ -14,7 +16,7 @@ proc HelpWeapons
     exit when eof(diskfile)
     get: diskfile,text:*
     Text.Locate(row,4)
-    put text," " ..
+    put text..
     row += 1
     end loop
     row := 6
@@ -25,6 +27,8 @@ proc HelpWeapons
 end HelpWeapons
 
 proc HelpMissiles
+    Text.Color(7)
+    Text.ColorBack(0)
     var diskfile:int
     var row : int := 6
     var text : string
@@ -36,7 +40,7 @@ proc HelpMissiles
     exit when eof(diskfile)
     get: diskfile,text:*
     Text.Locate(row,4)
-    put text," " ..
+    put text..
     row += 1
     end loop
     row := 6
@@ -47,6 +51,8 @@ proc HelpMissiles
 end HelpMissiles
 
 proc HelpTerms
+    Text.Color(7)
+    Text.ColorBack(0)
     var diskfile:int
     var row : int := 6
     var text : string
@@ -58,7 +64,7 @@ proc HelpTerms
     exit when eof(diskfile)
     get: diskfile,text:*
     Text.Locate(row,4)
-    put text," " ..
+    put text..
     row += 1
     end loop
     row := 6
@@ -69,18 +75,20 @@ proc HelpTerms
 end HelpTerms
 
 proc HelpGameplay
+    Text.Color(7)
+    Text.ColorBack(0)
     var diskfile:int
     var row : int := 6
     var text : string
     cls
-    open: diskfile,"man/game.man",get
+    open: diskfile,"man/gameplay.man",get
     assert diskfile>0
     locate(20,15)
     loop
     exit when eof(diskfile)
     get: diskfile,text:*
     Text.Locate(row,4)
-    put text," " ..
+    put text..
     row += 1
     end loop
     row := 6
@@ -91,6 +99,8 @@ proc HelpGameplay
 end HelpGameplay
 
 proc HelpConfig
+    Text.Color(7)
+    Text.ColorBack(0)
     var diskfile:int
     var row : int := 6
     var text : string
@@ -102,7 +112,7 @@ proc HelpConfig
     exit when eof(diskfile)
     get: diskfile,text:*
     Text.Locate(row,4)
-    put text," " ..
+    put text..
     row += 1
     end loop
     row := 6

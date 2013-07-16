@@ -1,3 +1,4 @@
+%class definitions for the four types of missiles
 class Missile_Impact
     inherit Object
     var theta : int := 0

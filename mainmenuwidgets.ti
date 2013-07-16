@@ -1,3 +1,4 @@
+%mainmenuwidgets.ti - the name says it all
 var MainMenuButtons : array 1 .. 5 of int
 MainMenuButtons(1) := GUI.CreateButton (250,400 , 256, "New Game", StartNewGame)
 MainMenuButtons(2) := GUI.CreateButton (250,350 , 256, "Configuration", ChangeConfig)
