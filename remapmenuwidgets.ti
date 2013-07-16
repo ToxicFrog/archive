@@ -1,3 +1,5 @@
+%widgets for key remapper..
+
 var RemapWidgets : array 1 .. 15 of int
 
 procedure Cpause
@@ -96,7 +98,7 @@ procedure Remap1NextMsl()
     Cpause
     SWConf.Key1NextMsl := getchar
     GUI.Dispose(RemapWidgets(7))
-    RemapWidgets(7) := GUI.CreateButton(200,250,64,SWConf.Key1Msl,Remap1NextMsl)
+    RemapWidgets(7) := GUI.CreateButton(200,250,64,SWConf.Key1NextMsl,Remap1NextMsl)
     GUI.Show(RemapWidgets(7))
     UnockAllRemapWidgets
     GUI.Refresh
@@ -181,7 +183,7 @@ procedure Remap2NextMsl()
     Cpause
     SWConf.Key2NextMsl := getchar
     GUI.Dispose(RemapWidgets(14))
-    RemapWidgets(14) := GUI.CreateButton(508,250,64,SWConf.Key2Msl,Remap2NextMsl)
+    RemapWidgets(14) := GUI.CreateButton(508,250,64,SWConf.Key2NextMsl,Remap2NextMsl)
     GUI.Show(RemapWidgets(14))
     UnockAllRemapWidgets
     GUI.Refresh

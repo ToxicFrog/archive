@@ -1,3 +1,5 @@
+%configmenuwidgets - all of the widgets used in the config shell and their associated update functions
+
 var ConfigMenuWidgets : array 1 .. 3 of int
 var ConfigMenuDamageWidgets : array 1 .. 7 of int
 var ConfigMenuSystemWidgets : array 1 .. 11 of int
@@ -116,9 +118,7 @@ procedure UpdateBeamerAccel(amt : int)
     View.Update
 end UpdateBeamerAccel
 procedure UpdateInverseGravity(ng:boolean)
-    if ng and SWConf.Gravity > 0 then
-        SWConf.Gravity *= -1
-    end if
+    UpdateGravity(abs(round(SWConf.Gravity*10)))
     View.Update
 end UpdateInverseGravity
 procedure UpdateKillsToWin(amt : int)

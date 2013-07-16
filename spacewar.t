@@ -1,16 +1,22 @@
 import GUI in "%oot/lib/GUI"
 
-
+%Object class proto
 include "object.ti"
+%record definitions
 include "recordtypes.ti"
+%function headers
 include "common.th"
+%consts
 include "config.ti"
 
+%background screens
 const MainMenuBG : int := Pic.FileNew("images/MainMenu.bmp")
 const NewGameBG : int := Pic.FileNew("images/NewGame.bmp")
 const ConfigBG : int := Pic.FileNew("images/Config.bmp")
+const RemapBG : int := Pic.FileNew("images/Remap.bmp")
 const HelpBG : int := Pic.FileNew("images/Help.bmp")
 
+%loadout indicators
 var *WpnImages           : array 1 .. 1 of int
 WpnImages(1) := Pic.FileNew("images/wpn_massdriver.bmp")
 var *AltWpnImages        : array 1 .. 1 of int
@@ -19,14 +25,19 @@ var *fpsavg : int :=30
 var *Players : array 1 .. 2 of PlayerStats
 var *ExitConditions : boolean := false
 
+%handle node to The Ring
 var *knot : ^node
 var *current : ^node
+
+%configuration record instance
 var *SWConf : Configuration
 
+%weapon % item stats
 include "primaries.ti"
 include "secondaries.ti"
 include "boxes.ti"
 
+%initialize The Ring
 var *input : array char of boolean
 new knot
 current := knot
@@ -35,94 +46,36 @@ knot->prev := knot->next
 knot->next->next := knot
 knot->next->prev := knot
 
-SWConf.PlayerHP := 100
-SWConf.Player1Color := 9
-SWConf.Player2Color := 10
-SWConf.PlayerAccel := 0.512
-
-SWConf.Gravity := 8
-SWConf.KillsToWin := 15
-SWConf.DeathsToLose := 15
-SWConf.MissilesPerPack := 5
-
-SWConf.DamagePerBullet := 5
-SWConf.DamagePerMiniBeam := 1
-SWConf.DamagePerLightBeam := 5
-SWConf.DamagePerHeavyBeam := 5
-SWConf.DamagePerMissileImpact := 20
-SWConf.DamagePerMissileBlast := 100
-SWConf.DamagePerMissileNeedler := 2
-
-SWConf.MiniBeamRange := 60
-SWConf.LightBeamRange := 120
-SWConf.HeavyBeamRange := 320
-SWConf.MissileImpactAccel := 0.1
-SWConf.MissileBlastAccel := 0.3
-SWConf.MissileNeedlerAccel := 0.4
-SWConf.MissileBeamAccel := 0.2
-
-SWConf.InitMassDriver := true
-SWConf.InitWMassDriver := false
-SWConf.InitXRL :=false
-SWConf.InitBrightLance := false
-SWConf.InitImpactMissiles := 5
-SWConf.InitBlastMissiles := 0
-SWConf.InitNeedlers := 0
-SWConf.InitBeamMissiles := 0
-
-SWConf.Key1Up := 'w'
-SWConf.Key1Lf := 'a'
-SWConf.Key1Rt := 'd'
-SWConf.Key1Gun := 's'
-SWConf.Key1Msl := 'x'
-SWConf.Key1NextGun := 'z'
-SWConf.Key1NextMsl := 'c'
-
-SWConf.Key2Up := '8'
-SWConf.Key2Lf := '4'
-SWConf.Key2Rt := '6'
-SWConf.Key2Gun := '5'
-SWConf.Key2Msl := '2'
-SWConf.Key2NextGun := '1'
-SWConf.Key2NextMsl := '3'
-
+%SWConf settings
+include "defaults.ti"
+%weapon class defs
 include "weapons.ti"
 include "missiles.ti"
+%the engine itself
 include "player.ti"
 include "system.ti"
 
+%set up text and fonts
 Text.ColorBack(7)
 Text.Color(0)
 cls
 var FontMain : int := Font.New ("impact:36")
 var FontTitle : int := Font.New ("impact:12")
 var FontSub : int := Font.New ("impact:8")
-var FontMid : int := Font.New ("impact:32")
 var ExitCall : boolean := false
 
+%widgets appear invisible by default now
 GUI.SetDisplayWhenCreated(false)
 
+%widgets for shell
 include "mainmenuwidgets.ti"
 include "newgamewidgets.ti"
 include "remapmenuwidgets.ti"
 include "helpmenuwidgets.ti"
 include "configmenuwidgets.ti"
-
-var ConfigItemTypes : array 1 .. 22 of string(40)
-
-ConfigItemTypes(1) := "int:1|9999;Player HP"      %player HP
-ConfigItemTypes(2) := "int:1|9999;Bullet Damage "      %damage
-ConfigItemTypes(3) := "int:1|9999;XRL Damage"      %damage
-ConfigItemTypes(4) := "int:1|9999;Bright Lance Damage"      %damage
-ConfigItemTypes(5) := "int:1|9999;Impacter Damage"      %damage
-ConfigItemTypes(6) := "int:1|9999;TCPW Damage"      %damage
-ConfigItemTypes(7) := "int:1|9999;Needler Damage"      %damage
-ConfigItemTypes(8) := "int:1|9999;Beam Missile Damage"      %damage
-ConfigItemTypes(9) := "int:1|1024;Kills To Win"      %kills
-ConfigItemTypes(10) := "int:1|1024;Deaths To Lose"      %deaths
-
 GUI.SetCheckBox(NewGameWidgets(3),true)
 
+%initialize the shell
 for i : 1 .. 5
     GUI.Show(MainMenuButtons(i))
 end for
@@ -134,8 +87,8 @@ loop
     exit when GUI.ProcessEvent
 end loop
 GUI.CloseWindow(Window.GetActive())
-%Main
 
+%called to do final configuration for a new game
 body procedure StartNewGame()
     for i : 1 .. 5
         GUI.Hide(MainMenuButtons(i))
@@ -183,6 +136,7 @@ body procedure StartNewGame()
     View.Update
 end StartNewGame
 
+%change the keybindings
 body procedure RemapKeys()    
     for i : 1 .. 5
         GUI.Hide(MainMenuButtons(i))
@@ -190,7 +144,8 @@ body procedure RemapKeys()
     for i : 1..15
         GUI.Show(RemapWidgets(i))
     end for
-    Pic.Draw(ConfigBG,0,0,0)
+    Pic.Draw(HelpBG,0,0,0) %we do this because RemapBG is 20 pixels too thin, so we fill in the gap with HelpBG
+    Pic.Draw(RemapBG,20,0,0)
     GUI.Refresh
     Font.Draw ("   REMAP ", 275, 650, FontMain, white)
     Font.Draw("Player 1",200,590,FontTitle,white)
@@ -255,6 +210,7 @@ body procedure ChangeConfig()
     View.Update
 end ChangeConfig
 
+%display the help screen widgets
 body procedure ShowHelp
     for i : 1 .. 5
         GUI.Hide(MainMenuButtons(i))
@@ -280,9 +236,12 @@ body procedure ShowHelp
     Font.Draw ("MAIN MENU", 275, 650, FontMain, white)
     View.Update
 end ShowHelp
-%include "menus.ti"
+
+%the heart of Spacewar
 include "main.ti"
+%trig functions
 include "enginemath.ti"
+%Ring functions
 include "nodeops.ti"
+%beams 'n' stuff
 include "effects.ti"
-%include "menu_config.ti"
