@@ -1,0 +1,47 @@
+Unofficial Starscape file format specs
+
+Starscape.000/001 format
+------------------------
+	The file format appears fairly simple; contained files are simply packed
+end to end, each one prefaced with a header. The header has the following
+format:
+
+0000	uint32		magic number ( 4D 4F 4F 4E "MOON" -- accept no substitutes)
+0004	byte[14]	??? Starts 0A 00 00 00 FF FF in 000, 00 00 00 00 FF FF in 001
+0012	uint32		length of file data in bytes - 0 for directories
+0016	uint32		??? same as length in 000; zero in 001
+001A	uint32		length of path, not null terminated
+001E	30 bytes total
+
+The header is immediately followed by the complete file path, which (in
+Starscape, anyways!) always starts with data/. This filename is not null
+terminated; you need to look at the header to see how long it is.
+If the file has a nonzero length, the filename is then immediately followed
+by the file data itself. This data is then followed by the header for the
+next file in the pak. Unlike LGS resfiles there's no padding for alignment;
+all contents are 1-aligned and packed directly head to tail.
+
+The packed data is followed by what appears at first glance to be a ZIP file,
+but upon closer examination does not appear to conform to any recent ZIP
+standard. It appears to duplicate some of the information in the chunk headers,
+such as file name and length, but may contain additional data. It looks like
+a list of entries with the following format:
+
+0000	uint32		magic number (50 4B 01 02 "PK\001\002")
+0004	byte[16]	???
+0014	uint32		length of file data in bytes, 0 for directories
+0018	uint32		??? as above
+001C	uint32		length of path, not null terminated
+0020	byte[10]	???
+002A	uint32		offset in pakfile of matching MOON header
+002E	46 bytes total
+
+As above, this is immediately followed by the filename.
+
+Starscape TXT format
+--------------------
+Not actually plaintext. Still working on this.
+
+Starscape SPR format
+--------------------
+Still working on this, too.
