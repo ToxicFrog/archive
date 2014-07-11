@@ -4,10 +4,12 @@ A lot of these projects predate my use of version control. Where multiple releas
 
 Here is a list of all branches in this repo (other than master, which contains this text):
 
-cubik     - a simple pattern-matching game
-gifttank  - a simple top-down shooter
-moonpak   - an unpacker for Moonpod Games packfiles
-shockmap  - render System Shock maps to HTML (prototype C implementation)
-spacewar  - a clone of the classic game with some extra features, written in Turing 4
-ss1hr     - a patch to enable high (800x600 & 1024x768) resolution rendering in System Shock 1
-unmpak4   - an unpacker for Massive Entertainment packfiles
+* cubik     - a simple pattern-matching game
+* gifttank  - a simple top-down shooter
+* moonpak   - an unpacker for Moonpod Games packfiles
+* shockmap  - render System Shock maps to HTML (prototype C implementation)
+* spacewar  - a clone of the classic game with some extra features, written in Turing 4
+* ss1hr     - a patch to enable high (800x600 & 1024x768) resolution rendering in System Shock 1
+* unmpak4   - an unpacker for Massive Entertainment packfiles
+
+Unless otherwise specified in their own branches, everything here is available under the terms of the MIT license; see COPYING.
