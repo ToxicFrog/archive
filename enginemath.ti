@@ -27,6 +27,3 @@ body function Theta(x1,y1,x2,y2:real):int
         result 180+round(arctand((y2-y1)/(x2-x1)))
     end if
 end Theta
-body function tand(theta : int) : real
-    result ComponentY(1,theta)/ComponentX(1,theta)
-end tand
